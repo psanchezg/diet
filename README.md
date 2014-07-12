@@ -18,7 +18,7 @@ $.domain = 'localhost';
 
 // router
 $('GET /', function(){
-    this.end('hello world');
+    end('hello world');
 });
 
 ```
@@ -39,8 +39,8 @@ $.domain = 'localhost';
 
 // router
 $('GET /', db, function(){
-    this.db('SELECT * FROM users', this.data); // call db and append results to the data object
-    this.end('hello world {{this.data[0].name}}');
+    db('SELECT * FROM users', data); // call db and append results to the data object
+    end('hello world {{this.data[0].name}}');
 });
 
 ```
