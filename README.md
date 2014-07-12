@@ -111,14 +111,34 @@ $('GET /something', function(){
     success         // json success respond function
     error           // json error response function
 });
+```
 
-```
-```
 Run
 ---
 ```
 node index.js
 ```
 
-Create a Plugin
+Create a Plugin for Router
 ---
+```
+    // my-plugin.js
+    var $ = require('diet');
+    module.exports = function(options){
+        // this function is called from within the router
+        return function(signal, plugins){
+            return 'Hello ['+signal.ip+'] from myPlugin!';
+        }
+    }
+    
+    // index.js
+    $ = require('diet');
+    var myPlugin = $.plugin('my-plugin.js');
+    
+    $('GET /hello', myPlugin, function(){
+        var message = myPlugin();
+        end(message);
+    });
+    
+    
+```
