@@ -117,8 +117,23 @@ Run
 node index.js
 ```
 
+A regular folder structure
+---
+```
+/node_modules
+/plugins
+/static
+    /html
+    /styles
+    /scripts
+    /images
+/routes
+index.js
+```
+
 Create a Plugin for Router
 ---
+in **/plugins/my-plugin.js**
 ```js
 // my-plugin.js
 var $ = require('diet');
@@ -128,8 +143,10 @@ module.exports = function(options){
         return 'Hello ['+signal.ip+'] from myPlugin!';
     }
 }
-    
-// index.js
+```
+
+in **/index.js**
+```js 
 $ = require('diet');
 var myPlugin = $.plugin('my-plugin.js');
     
