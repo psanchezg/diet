@@ -39,18 +39,38 @@ var db = $.plugin('diet-mysql')({
 });
 
 // PLUGIN the ECT template engine module
-$.plugin('ect', { open: '{{', close: '}}' }) 
+$.plugin('diet-ect', { open: '{{', close: '}}' }) 
 
 // ROUTE GET /
 $('GET /', db, function(){ // <-- no arguments needed!
     // plugins and local functions are being called without
     // having to bother with arguments
     
-    // call db and append results to the data object
+    // call db() and append results to the data object
     db('SELECT * FROM users', data); 
     
-    // the end functions sends back a 
-    end('hello world {{this.data[0].name}}');
+    // the end() function sends back a response
+    // the diet-ect plugin allows to send back
+    // data-driven dynamic strings
+    end('hello world {{-this.data[0].name}}');
+});
+
+```
+
+Respond with HTML
+---
+```js
+// SETUP
+$ = require('diet');
+$.domain = 'localhost'; 
+$.plugin('static');
+$.plugin('diet-ect', { open: '{{', close: '}}' });
+
+// ROUTE GET /
+// by default /static/index.html is used
+// so html() is fine too without an argument
+$('GET /', function(){
+    html('/static/index.html'); 
 });
 
 ```
