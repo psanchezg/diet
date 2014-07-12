@@ -5,7 +5,7 @@ A minimal plugin based http framework for node.js . Diet will save you developme
 --
 
 #### **Why another framework?**
- - Diet is the fastest server in the universe. Diet can speed up your response delivery by 99% with it's unique caching mechanism.
+ - Diet is the fastest server in the universe. Diet can speed up your response delivery by 99% with it's unique caching mechanism. No matter how complex your server logic is, diet makes a compact binary version of it and you can update your caches whenever a change has happened.
  - Diet has a very pleasing human syntax unlike any other framework.
  - Diet is easier to learn and understand than other frameworks.
  - Diet is packed with default plugins that solve 90% of use cases in all your apps. For example: 
