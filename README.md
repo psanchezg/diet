@@ -96,7 +96,23 @@ $('GET /something', function(){
     errors.email = 'Email is already in use.';
     error(); // responds with { success: false, errors: [errors Object] } 
 });
+```
 
+Route Variables for GET
+---
+```js
+$('GET /something', function(){
+    url             // /something ==> { href: '/something', hostname: 'localhost', pathname: 'something' }
+    query           // ?a=b ==> { a: 'b' }
+    params          // /something:id ==> { id: 'x100' }
+    end             // default respond function
+    errors          // errors object
+    json            // json respond function
+    success         // json success respond function
+    error           // json error response function
+});
+
+```
 ```
 Run
 ---
