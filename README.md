@@ -120,21 +120,21 @@ node index.js
 Create a Plugin for Router
 ---
 ```js
-    // my-plugin.js
-    var $ = require('diet');
-    module.exports = function(options){
-        // this function is called from within the router
-        return function(signal, plugins){
-            return 'Hello ['+signal.ip+'] from myPlugin!';
-        }
+// my-plugin.js
+var $ = require('diet');
+module.exports = function(options){
+    // this function is called from within the router
+    return function(signal, plugins){
+        return 'Hello ['+signal.ip+'] from myPlugin!';
     }
+}
     
-    // index.js
-    $ = require('diet');
-    var myPlugin = $.plugin('my-plugin.js');
+// index.js
+$ = require('diet');
+var myPlugin = $.plugin('my-plugin.js');
     
-    $('GET /hello', myPlugin, function(){
-        var message = myPlugin();
-        end(message);
-    });
+$('GET /hello', myPlugin, function(){
+    var message = myPlugin();
+    end(message);
+});
 ```
