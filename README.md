@@ -57,15 +57,9 @@ $('GET /', db, function(){ // <-- no arguments needed!
 
 ```
 
-Respond Types
+Respond with HTML
 ---
 ```js
-// SETUP
-$ = require('diet');
-$.domain = 'localhost'; 
-
-
-// Respond with HTML
 // you will need a static file handler plugin. 
 // `diet-static` is a plugin for the `send` module
 $.plugin('diet-static');
@@ -77,18 +71,27 @@ $.plugin('diet-ect', { open: '{{', close: '}}' });
 $('GET /', function(){
     html(); // if left empty returns the contents of /static/html/index.html
 });
+```
 
-// Respond with JSON
+Respond with JSON
+---
+```js
 $('GET /something', function(){
     json({ hello: 'world' }); // if left empty it's {}
 });
+```
 
-// Respond with success
+Respond with success
+---
+```js
 $('GET /something', function(){
     success(); // responds with { success: true } 
 });
+```
 
-// Respond with error
+Respond with error
+---
+```js
 $('GET /something', function(){
     errors.email = 'Email is already in use.';
     error(); // responds with { success: false, errors: [errors Object] } 
