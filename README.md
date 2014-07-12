@@ -1,7 +1,7 @@
 **diet**
 ===
 
-A minimal plugin based http framework for node.js . Diet is will save you development time and make your apps much more efficient.
+A minimal plugin based http framework for node.js . Diet will save you development time and make your apps much more efficient.
 --
 
 #### **Why another framework?**
