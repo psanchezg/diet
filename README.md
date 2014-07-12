@@ -20,7 +20,6 @@ $.domain = 'localhost';
 $('GET /', function(){
     end('hello world');
 });
-
 ```
 Load MySQL module as a plugin
 ---
@@ -54,7 +53,6 @@ $('GET /', db, function(){ // <-- no arguments needed!
     // data-driven dynamic strings
     end('hello world {{-this.data[0].name}}');
 });
-
 ```
 
 Respond with HTML
@@ -121,7 +119,7 @@ node index.js
 
 Create a Plugin for Router
 ---
-```
+```js
     // my-plugin.js
     var $ = require('diet');
     module.exports = function(options){
@@ -139,6 +137,4 @@ Create a Plugin for Router
         var message = myPlugin();
         end(message);
     });
-    
-    
 ```
