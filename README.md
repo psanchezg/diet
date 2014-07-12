@@ -57,20 +57,41 @@ $('GET /', db, function(){ // <-- no arguments needed!
 
 ```
 
-Respond with HTML
+Respond Types
 ---
 ```js
 // SETUP
 $ = require('diet');
 $.domain = 'localhost'; 
-$.plugin('static');
+
+
+// Respond with HTML
+// you will need a static file handler plugin. 
+// `diet-static` is a plugin for the `send` module
+$.plugin('diet-static');
+
+// if you need dynamic html use then plugin a template engine 
+// `diet-ect` is a plugin for the `ECT` template engine
 $.plugin('diet-ect', { open: '{{', close: '}}' });
 
-// ROUTE GET /
-// by default /static/index.html is used
-// so html() is fine too without an argument
 $('GET /', function(){
-    html('/static/index.html'); 
+    html(); // if left empty returns the contents of /static/html/index.html
+});
+
+// Respond with JSON
+$('GET /something', function(){
+    json({ hello: 'world' }); // if left empty it's {}
+});
+
+// Respond with success
+$('GET /something', function(){
+    success(); // responds with { success: true } 
+});
+
+// Respond with error
+$('GET /something', function(){
+    errors.email = 'Email is already in use.';
+    error(); // responds with { success: false, errors: [errors Object] } 
 });
 
 ```
