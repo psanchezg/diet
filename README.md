@@ -4,13 +4,13 @@ diet
 A minimal plugin based http framework.
 
 Install
-===
+---
 ```
 npm install diet
 ```
 
 Hello World!
-===
+---
 ```js
 // require diet
 $ = require('diet');
@@ -22,9 +22,8 @@ $('GET /', function(){
 });
 
 ```
-
 Load MySQL module as a plugin
-===
+---
 ```js
 // require diet-mysql
 var db = require('diet-mysql')({
@@ -46,7 +45,7 @@ $('GET /', db, function(){
 
 ```
 Run
-===
+---
 ```
 node index.js
 ```
