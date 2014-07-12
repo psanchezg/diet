@@ -1,16 +1,27 @@
-diet
-====
+**diet**
+===
 
-A minimal plugin based http framework.
+A minimal plugin based http framework for node.js . Diet is will save you development time and make your apps much more efficient.
+--
 
-Install
----
+#### **Why another framework?**
+
+ - Diet has a very pleasing human syntax unlike any other framework.
+ - Diet is easier to learn and understand than other frameworks.
+ - Diet is packed with default plugins that solve 90% of use cases in all your apps. For example: 
+	 - email *(based on nodemailer)*
+	 - mysql *(based on mysql armed with no-sql like syntax)*
+	 - upload *(based on formidable)*
+	 - demand - form validation
+	 - static - file handler
+	 - ect - html template engine
+
+#### **Install**
 ```
 npm install diet
 ```
 
-Hello World!
----
+####**Hello World! in diet**
 ```js
 // SETUP
 $ = require('diet');
@@ -21,8 +32,7 @@ $('GET /', function(){
     end('hello world');
 });
 ```
-Load MySQL module as a plugin
----
+##### **Load MySQL module as a plugin**
 ```js
 
 // SETUP
@@ -55,8 +65,7 @@ $('GET /', db, function(){ // <-- no arguments needed!
 });
 ```
 
-Respond with HTML
----
+##### **Respond with HTML**
 ```js
 // you will need a static file handler plugin. 
 // `diet-static` is a plugin for the `send` module
@@ -71,24 +80,22 @@ $('GET /', function(){
 });
 ```
 
-Respond with JSON
----
+##### **Respond with JSON**
+
 ```js
 $('GET /something', function(){
     json({ hello: 'world' }); // if left empty it's {}
 });
 ```
 
-Respond with success
----
+##### **Respond with success**
 ```js
 $('GET /something', function(){
     success(); // responds with { success: true } 
 });
 ```
 
-Respond with error
----
+##### **Respond with error**
 ```js
 $('GET /something', function(){
     errors.email = 'Email is already in use.';
@@ -96,8 +103,7 @@ $('GET /something', function(){
 });
 ```
 
-Route Variables for GET
----
+#### **Route Variables for GET**
 ```js
 $('GET /something', function(){
     url             // /something ==> { href: '/something', hostname: 'localhost', pathname: 'something' }
@@ -111,14 +117,12 @@ $('GET /something', function(){
 });
 ```
 
-Run
----
+#### **Run**
 ```
 node index.js
 ```
 
-A regular folder structure
----
+#### **A regular folder structure**
 ```
 /node_modules
 /plugins
@@ -131,8 +135,8 @@ A regular folder structure
 index.js
 ```
 
-Create a Plugin for Router
----
+#### **Create a Plugin for Router**
+
 in **/plugins/my-plugin.js**
 ```js
 // my-plugin.js
