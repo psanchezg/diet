@@ -29,197 +29,163 @@
       </header>
       <section>
         <h1>
-<a name="diet" class="anchor" href="#diet"><span class="octicon octicon-link"></span></a><strong>diet</strong>
+<a name="diet" class="anchor" href="#diet"><span class="octicon octicon-link"></span></a><strong>Diet</strong>
 </h1>
 
+<p>Diet is a beautiful, minimalistic, extensible HTTP framework for node.js. When you're code is on diet, your apps become skinny, fast, organized &amp; healthy!</p>
+
 <h2>
-<a name="a-minimal-plugin-based-http-framework-for-nodejs--diet-will-save-you-development-time-and-make-your-apps-much-more-efficient" class="anchor" href="#a-minimal-plugin-based-http-framework-for-nodejs--diet-will-save-you-development-time-and-make-your-apps-much-more-efficient"><span class="octicon octicon-link"></span></a>A minimal plugin based http framework for node.js . Diet will save you development time and make your apps much more efficient.</h2>
-
-<h4>
-<a name="why-another-framework" class="anchor" href="#why-another-framework"><span class="octicon octicon-link"></span></a><strong>Why another framework?</strong>
-</h4>
+<a name="what-does-diet-do" class="anchor" href="#what-does-diet-do"><span class="octicon octicon-link"></span></a><strong>What does diet do?</strong>
+</h2>
 
 <ul>
-<li>Diet is the fastest server in the universe. Diet can speed up your response delivery by 99% with it's unique caching mechanism. No matter how complex your server logic is, diet makes a compact binary version of it and you can update your caches whenever a change has happened.</li>
-<li>Diet has a very pleasing human syntax unlike any other framework.</li>
-<li>Diet is easier to learn and understand than other frameworks.</li>
-<li>Diet is packed with default plugins that solve 90% of use cases in all your apps. For example: 
+<li>Diet provides <strong>Plugins</strong> that extend your apps functionality.</li>
+<li>Diet provides <strong>HTTP Routing</strong>.</li>
+<li>Diet provides <strong>HTTP Domain Controlling</strong>.</li>
+<li>Diet provides the <strong><code>$</code> signal argument</strong> that is a combination of the request and response objects. The signal argument holds key informations about the request, and some default functions, like <code>$.end()</code>, <code>$.url</code>, <code>$.query</code>, <code>$.body</code>, <code>$.headers</code>
+</li>
+<li>Diet ships with some powerful basic plugins: <code>sessions</code>,  <code>demands</code>, <code>diet-mysql</code>, <code>diet-accounts</code>, <code>diet-cookies</code>, <code>diet-mail</code>
+</li>
+</ul><h2>
+<a name="hello-world" class="anchor" href="#hello-world"><span class="octicon octicon-link"></span></a><strong>Hello World!</strong>
+</h2>
 
-<ul>
-<li>email <em>(based on nodemailer)</em>
-</li>
-<li>mysql <em>(based on mysql armed with no-sql like syntax)</em>
-</li>
-<li>upload <em>(based on formidable)</em>
-</li>
-<li>demand - form validation</li>
-<li>static - file handler</li>
-<li>ect - html template engine</li>
-</ul>
-</li>
-</ul><h4>
+<div class="highlight highlight-js"><pre><span class="nx">$</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'diet'</span><span class="p">);</span>
+<span class="nx">$</span><span class="p">.</span><span class="nx">http</span><span class="p">(</span><span class="s1">'localhost'</span><span class="p">,</span> <span class="mi">8000</span><span class="p">);</span>
+<span class="nx">$</span><span class="p">(</span><span class="s1">'GET /'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">$</span><span class="p">){</span> <span class="nx">$</span><span class="p">.</span><span class="nx">end</span><span class="p">(</span><span class="s1">'Hello World!'</span><span class="p">);</span> <span class="p">})</span>
+</pre></div>
+
+<p>in just 3 lines.</p>
+
+<h2>
 <a name="install" class="anchor" href="#install"><span class="octicon octicon-link"></span></a><strong>Install</strong>
-</h4>
+</h2>
 
-<pre><code>npm install diet
-</code></pre>
+<p><code>npm install diet</code></p>
 
-<h4>
-<a name="hello-world-in-diet" class="anchor" href="#hello-world-in-diet"><span class="octicon octicon-link"></span></a><strong>Hello World! in diet</strong>
-</h4>
+<h2>
+<a name="diet-plugins" class="anchor" href="#diet-plugins"><span class="octicon octicon-link"></span></a><strong>Diet Plugins</strong>
+</h2>
 
-<div class="highlight highlight-js"><pre><span class="c1">// SETUP</span>
-<span class="nx">$</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'diet'</span><span class="p">);</span>
-<span class="nx">$</span><span class="p">.</span><span class="nx">domain</span> <span class="o">=</span> <span class="s1">'localhost'</span><span class="p">;</span>
-
-<span class="c1">// ROUTE GET /</span>
-<span class="nx">$</span><span class="p">(</span><span class="s1">'GET /'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span>
-    <span class="nx">end</span><span class="p">(</span><span class="s1">'hello world'</span><span class="p">);</span>
-<span class="p">});</span>
-</pre></div>
-
-<h5>
-<a name="load-mysql-module-as-a-plugin" class="anchor" href="#load-mysql-module-as-a-plugin"><span class="octicon octicon-link"></span></a><strong>Load MySQL module as a plugin</strong>
-</h5>
-
-<div class="highlight highlight-js"><pre>
-<span class="c1">// SETUP</span>
-<span class="nx">$</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'diet'</span><span class="p">);</span>
-<span class="nx">$</span><span class="p">.</span><span class="nx">domain</span> <span class="o">=</span> <span class="s1">'localhost'</span><span class="p">;</span> 
-
-<span class="c1">// PLUGIN diet-mysql module</span>
-<span class="kd">var</span> <span class="nx">db</span> <span class="o">=</span> <span class="nx">$</span><span class="p">.</span><span class="nx">plugin</span><span class="p">(</span><span class="s1">'diet-mysql'</span><span class="p">)({</span>
-    <span class="nx">host</span><span class="o">:</span> <span class="s1">'localhost'</span><span class="p">,</span>
-    <span class="nx">user</span><span class="o">:</span> <span class="s1">'root'</span><span class="p">,</span>
-    <span class="nx">password</span><span class="o">:</span> <span class="s1">''</span><span class="p">,</span>
-    <span class="nx">database</span><span class="o">:</span> <span class="s1">'hello'</span>
-<span class="p">});</span>
-
-<span class="c1">// PLUGIN the ECT template engine module</span>
-<span class="nx">$</span><span class="p">.</span><span class="nx">plugin</span><span class="p">(</span><span class="s1">'diet-ect'</span><span class="p">,</span> <span class="p">{</span> <span class="nx">open</span><span class="o">:</span> <span class="s1">'{{'</span><span class="p">,</span> <span class="nx">close</span><span class="o">:</span> <span class="s1">'}}'</span> <span class="p">})</span> 
-
-<span class="c1">// ROUTE GET /</span>
-<span class="nx">$</span><span class="p">(</span><span class="s1">'GET /'</span><span class="p">,</span> <span class="nx">db</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span> <span class="c1">// &lt;-- no arguments needed!</span>
-    <span class="c1">// plugins and local functions are being called without</span>
-    <span class="c1">// having to bother with arguments</span>
-
-    <span class="c1">// call db() and append results to the data object</span>
-    <span class="nx">db</span><span class="p">(</span><span class="s1">'SELECT * FROM users'</span><span class="p">,</span> <span class="nx">data</span><span class="p">);</span> 
-
-    <span class="c1">// the end() function sends back a response</span>
-    <span class="c1">// the diet-ect plugin allows to send back</span>
-    <span class="c1">// data-driven dynamic strings</span>
-    <span class="nx">end</span><span class="p">(</span><span class="s1">'hello world {{-this.data[0].name}}'</span><span class="p">);</span>
-<span class="p">});</span>
-</pre></div>
-
-<h5>
-<a name="respond-with-html" class="anchor" href="#respond-with-html"><span class="octicon octicon-link"></span></a><strong>Respond with HTML</strong>
-</h5>
-
-<div class="highlight highlight-js"><pre><span class="c1">// you will need a static file handler plugin. </span>
-<span class="c1">// `diet-static` is a plugin for the `send` module</span>
-<span class="nx">$</span><span class="p">.</span><span class="nx">plugin</span><span class="p">(</span><span class="s1">'diet-static'</span><span class="p">);</span>
-
-<span class="c1">// if you need dynamic html use then plugin a template engine </span>
-<span class="c1">// `diet-ect` is a plugin for the `ECT` template engine</span>
-<span class="nx">$</span><span class="p">.</span><span class="nx">plugin</span><span class="p">(</span><span class="s1">'diet-ect'</span><span class="p">,</span> <span class="p">{</span> <span class="nx">open</span><span class="o">:</span> <span class="s1">'{{'</span><span class="p">,</span> <span class="nx">close</span><span class="o">:</span> <span class="s1">'}}'</span> <span class="p">});</span>
-
-<span class="nx">$</span><span class="p">(</span><span class="s1">'GET /'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span>
-    <span class="nx">html</span><span class="p">();</span> <span class="c1">// if left empty returns the contents of /static/html/index.html</span>
-<span class="p">});</span>
-</pre></div>
-
-<h5>
-<a name="respond-with-json" class="anchor" href="#respond-with-json"><span class="octicon octicon-link"></span></a><strong>Respond with JSON</strong>
-</h5>
-
-<div class="highlight highlight-js"><pre><span class="nx">$</span><span class="p">(</span><span class="s1">'GET /something'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span>
-    <span class="nx">json</span><span class="p">({</span> <span class="nx">hello</span><span class="o">:</span> <span class="s1">'world'</span> <span class="p">});</span> <span class="c1">// if left empty it's {}</span>
-<span class="p">});</span>
-</pre></div>
-
-<h5>
-<a name="respond-with-success" class="anchor" href="#respond-with-success"><span class="octicon octicon-link"></span></a><strong>Respond with success</strong>
-</h5>
-
-<div class="highlight highlight-js"><pre><span class="nx">$</span><span class="p">(</span><span class="s1">'GET /something'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span>
-    <span class="nx">success</span><span class="p">();</span> <span class="c1">// responds with { success: true } </span>
-<span class="p">});</span>
-</pre></div>
-
-<h5>
-<a name="respond-with-error" class="anchor" href="#respond-with-error"><span class="octicon octicon-link"></span></a><strong>Respond with error</strong>
-</h5>
-
-<div class="highlight highlight-js"><pre><span class="nx">$</span><span class="p">(</span><span class="s1">'GET /something'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span>
-    <span class="nx">errors</span><span class="p">.</span><span class="nx">email</span> <span class="o">=</span> <span class="s1">'Email is already in use.'</span><span class="p">;</span>
-    <span class="nx">error</span><span class="p">();</span> <span class="c1">// responds with { success: false, errors: [errors Object] } </span>
-<span class="p">});</span>
-</pre></div>
+<p>Plugins are middlewares that act as a bridge between modules and help write much more efficient Object Oriented code. Plugins are essentially regular node.js functions or modules that follow a standard based on diet's <code>$</code> <em>(signal)</em> argument.</p>
 
 <h4>
-<a name="route-variables-for-get" class="anchor" href="#route-variables-for-get"><span class="octicon octicon-link"></span></a><strong>Route Variables for GET</strong>
+<a name="the-3-types-of-plugins" class="anchor" href="#the-3-types-of-plugins"><span class="octicon octicon-link"></span></a><strong>The 3 Types of Plugins</strong>
 </h4>
 
-<div class="highlight highlight-js"><pre><span class="nx">$</span><span class="p">(</span><span class="s1">'GET /something'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span>
-    <span class="nx">url</span>             <span class="c1">// /something ==&gt; { href: '/something', hostname: 'localhost', pathname: 'something' }</span>
-    <span class="nx">query</span>           <span class="c1">// ?a=b ==&gt; { a: 'b' }</span>
-    <span class="nx">params</span>          <span class="c1">// /something:id ==&gt; { id: 'x100' }</span>
-    <span class="nx">end</span>             <span class="c1">// default respond function</span>
-    <span class="nx">errors</span>          <span class="c1">// errors object</span>
-    <span class="nx">json</span>            <span class="c1">// json respond function</span>
-    <span class="nx">success</span>         <span class="c1">// json success respond function</span>
-    <span class="nx">error</span>           <span class="c1">// json error response function</span>
-<span class="p">});</span>
-</pre></div>
+<p>Plugins may be all or at least one of these types:</p>
 
-<h4>
-<a name="run" class="anchor" href="#run"><span class="octicon octicon-link"></span></a><strong>Run</strong>
+<ul>
+<li>
+<strong>Onload</strong> plugin</li>
+<li>
+<strong>Global</strong> plugin</li>
+<li>
+<strong>Local</strong> plugin</li>
+</ul><h4>
+<a name="onload-plugins" class="anchor" href="#onload-plugins"><span class="octicon octicon-link"></span></a><strong>Onload Plugins</strong>
 </h4>
 
-<pre><code>node index.js
-</code></pre>
+<p>Onload plugins <em>run code right away after the plugin was initialized</em>. The use cases of onload plugins are very handy when you want to alter the signal property globally, preprocess data, update caches, schedule/execute background tasks etc.</p>
 
-<h4>
-<a name="a-regular-folder-structure" class="anchor" href="#a-regular-folder-structure"><span class="octicon octicon-link"></span></a><strong>A regular folder structure</strong>
-</h4>
+<p><strong>An Example Plugin:</strong></p>
 
-<pre><code>/node_modules
-/plugins
-/static
-    /html
-    /styles
-    /scripts
-    /images
-/routes
-index.js
-</code></pre>
-
-<h4>
-<a name="create-a-plugin-for-router" class="anchor" href="#create-a-plugin-for-router"><span class="octicon octicon-link"></span></a><strong>Create a Plugin for Router</strong>
-</h4>
-
-<p>in <strong>/plugins/my-plugin.js</strong></p>
-
-<div class="highlight highlight-js"><pre><span class="c1">// my-plugin.js</span>
-<span class="kd">var</span> <span class="nx">$</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'diet'</span><span class="p">);</span>
-<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">options</span><span class="p">){</span>
-    <span class="c1">// this function is called from within the router</span>
-    <span class="k">return</span> <span class="kd">function</span><span class="p">(</span><span class="nx">signal</span><span class="p">,</span> <span class="nx">plugins</span><span class="p">){</span>
-        <span class="k">return</span> <span class="s1">'Hello ['</span><span class="o">+</span><span class="nx">signal</span><span class="p">.</span><span class="nx">ip</span><span class="o">+</span><span class="s1">'] from myPlugin!'</span><span class="p">;</span>
-    <span class="p">}</span>
+<div class="highlight highlight-js"><pre><span class="c1">// project/example.js</span>
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="kd">function</span> <span class="nx">example</span><span class="p">(</span><span class="nx">$</span><span class="p">){</span> 
+    <span class="nx">$</span><span class="p">.</span><span class="nx">message</span> <span class="o">=</span> <span class="s1">'hello world!'</span><span class="p">;</span>
+    <span class="nx">$</span><span class="p">.</span><span class="k">return</span><span class="p">();</span>
 <span class="p">}</span>
 </pre></div>
 
-<p>in <strong>/index.js</strong></p>
+<div class="highlight highlight-js"><pre><span class="c1">// project/index.js</span>
+<span class="nx">$</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'diet'</span><span class="p">);</span>    
+<span class="nx">$</span><span class="p">.</span><span class="nx">http</span><span class="p">(</span><span class="s1">'localhost'</span><span class="p">,</span> <span class="mi">8000</span><span class="p">);</span>
+<span class="nx">$</span><span class="p">.</span><span class="nx">plugin</span><span class="p">(</span><span class="s1">'example.js'</span><span class="p">);</span> <span class="c1">// pass a function as the second</span>
+                        <span class="c1">// argument for an async callback</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">$</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span> <span class="c1">// -&gt; hello world!</span>
+</pre></div>
 
-<div class="highlight highlight-js"><pre><span class="nx">$</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'diet'</span><span class="p">);</span>
-<span class="kd">var</span> <span class="nx">myPlugin</span> <span class="o">=</span> <span class="nx">$</span><span class="p">.</span><span class="nx">plugin</span><span class="p">(</span><span class="s1">'my-plugin.js'</span><span class="p">);</span>
+<h4>
+<a name="global-plugins" class="anchor" href="#global-plugins"><span class="octicon octicon-link"></span></a><strong>Global Plugins</strong>
+</h4>
 
-<span class="nx">$</span><span class="p">(</span><span class="s1">'GET /hello'</span><span class="p">,</span> <span class="nx">myPlugin</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span>
-    <span class="kd">var</span> <span class="nx">message</span> <span class="o">=</span> <span class="nx">myPlugin</span><span class="p">();</span>
-    <span class="nx">end</span><span class="p">(</span><span class="nx">message</span><span class="p">);</span>
+<p>Global plugins run on all incoming HTTP requests/routes. Global plugins can be handy when you need certain functionalities in all or a specific type of routes for example sessions &amp; static file handling.</p>
+
+<p><strong>Example Plugin:</strong></p>
+
+<div class="highlight highlight-js"><pre><span class="c1">// project/example.js</span>
+<span class="kd">var</span> <span class="nx">path</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'path'</span><span class="p">);</span>
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span><span class="p">.</span><span class="nx">global</span> <span class="o">=</span> <span class="kd">function</span> <span class="nx">example</span><span class="p">(</span><span class="nx">$</span><span class="p">){</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">extension</span> <span class="o">=</span> <span class="nx">path</span><span class="p">.</span><span class="nx">extname</span><span class="p">(</span><span class="nx">$</span><span class="p">.</span><span class="nx">url</span><span class="p">.</span><span class="nx">href</span><span class="p">);</span>
+    <span class="nx">$</span><span class="p">.</span><span class="k">return</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+
+<div class="highlight highlight-js"><pre><span class="c1">// project/index.js</span>
+<span class="nx">$</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'diet'</span><span class="p">);</span>
+<span class="nx">$</span><span class="p">.</span><span class="nx">http</span><span class="p">(</span><span class="s1">'localhost'</span><span class="p">,</span> <span class="mi">8000</span><span class="p">);</span>
+<span class="nx">$</span><span class="p">.</span><span class="nx">plugin</span><span class="p">(</span><span class="s1">'example.js'</span><span class="p">);</span>
+
+<span class="nx">$</span><span class="p">(</span><span class="s1">'get /'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">$</span><span class="p">){</span>
+    <span class="nx">$</span><span class="p">.</span><span class="nx">end</span><span class="p">(</span><span class="s1">'Extension is '</span> <span class="o">+</span> <span class="nx">$</span><span class="p">.</span><span class="nx">example</span><span class="p">.</span><span class="nx">extension</span><span class="p">);</span>
+<span class="p">});</span>
+
+<span class="nx">$</span><span class="p">(</span><span class="s1">'get /image.jpg'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">$</span><span class="p">){</span>
+    <span class="nx">$</span><span class="p">.</span><span class="nx">end</span><span class="p">(</span><span class="s1">'Extension is '</span> <span class="o">+</span> <span class="nx">$</span><span class="p">.</span><span class="nx">example</span><span class="p">.</span><span class="nx">extension</span><span class="p">);</span>
+<span class="p">});</span>
+</pre></div>
+
+<pre><code>// terminal
+curl 'http://localhost:8000/'
+-&gt; Extension is undefined
+
+curl 'http://localhost:8000/image.jpg'
+-&gt; Extension is .jpg
+</code></pre>
+
+<h4>
+<a name="local-plugins" class="anchor" href="#local-plugins"><span class="octicon octicon-link"></span></a><strong>Local Plugins</strong>
+</h4>
+
+<p>Local plugins run on specified routes. Local plugins are handy for organizing your code for optimization, so each plugin is required only when it is actually needed.</p>
+
+<p><strong>Example Local Plugin as a Module:</strong></p>
+
+<div class="highlight highlight-js"><pre><span class="c1">// project/example.js</span>
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span><span class="p">.</span><span class="nx">local</span> <span class="o">=</span> <span class="kd">function</span> <span class="nx">person</span><span class="p">(</span><span class="nx">$</span><span class="p">){</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="s1">'Adam'</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">age</span> <span class="o">=</span> <span class="mi">20</span><span class="p">;</span>
+    <span class="nx">$</span><span class="p">.</span><span class="k">return</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+
+<div class="highlight highlight-js"><pre><span class="c1">// project/index.js</span>
+<span class="nx">$</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'diet'</span><span class="p">);</span>
+<span class="nx">$</span><span class="p">.</span><span class="nx">http</span><span class="p">(</span><span class="s1">'localhost'</span><span class="p">,</span> <span class="mi">8000</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">person</span> <span class="o">=</span> <span class="nx">$</span><span class="p">.</span><span class="nx">plugin</span><span class="p">(</span><span class="s1">'example.js'</span><span class="p">);</span>
+
+<span class="nx">$</span><span class="p">(</span><span class="s1">'get /'</span><span class="p">,</span> <span class="nx">person</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">$</span><span class="p">){</span>
+    <span class="nx">$</span><span class="p">.</span><span class="nx">end</span><span class="p">(</span><span class="s1">'Hi I am '</span> <span class="o">+</span> <span class="nx">$</span><span class="p">.</span><span class="nx">person</span><span class="p">.</span><span class="nx">name</span> <span class="o">+</span> <span class="s1">', '</span>  <span class="o">+</span> <span class="nx">$</span><span class="p">.</span><span class="nx">person</span><span class="p">.</span><span class="nx">age</span> <span class="o">+</span> <span class="s1">' old.'</span><span class="p">);</span>
+    <span class="c1">// -&gt; Hi I am Adam, 20 years old.</span>
+<span class="p">});</span>
+</pre></div>
+
+<p><strong>Example Local Plugin as a Function:</strong>
+Local plugins can also be created as functions</p>
+
+<div class="highlight highlight-js"><pre><span class="c1">// project/index.js</span>
+<span class="nx">$</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'diet'</span><span class="p">);</span>
+<span class="nx">$</span><span class="p">.</span><span class="nx">http</span><span class="p">(</span><span class="s1">'localhost'</span><span class="p">,</span> <span class="mi">8000</span><span class="p">);</span>
+
+<span class="kd">function</span> <span class="nx">person</span><span class="p">(</span><span class="nx">$</span><span class="p">){</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="s1">'Adam'</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">age</span> <span class="o">=</span> <span class="mi">20</span><span class="p">;</span>
+    <span class="nx">$</span><span class="p">.</span><span class="k">return</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="nx">$</span><span class="p">(</span><span class="s1">'GET /'</span><span class="p">,</span> <span class="nx">person</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">$</span><span class="p">){</span>
+    <span class="nx">$</span><span class="p">.</span><span class="nx">end</span><span class="p">(</span><span class="s1">'Hi I am, '</span> <span class="o">+</span> <span class="nx">$</span><span class="p">.</span><span class="nx">person</span><span class="p">.</span><span class="nx">name</span> <span class="o">+</span> <span class="s1">', '</span>  <span class="o">+</span> <span class="nx">$</span><span class="p">.</span><span class="nx">person</span><span class="p">.</span><span class="nx">age</span> <span class="o">+</span> <span class="s1">' old'</span><span class="p">);</span>
+    <span class="c1">// -&gt; Hi I am Adam, 20 years old.</span>
 <span class="p">});</span>
 </pre></div>
       </section>
