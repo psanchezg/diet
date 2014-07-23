@@ -1,45 +1,34 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
+    <meta charset='utf-8'>
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>Diet by adamhalasz</title>
-    <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-    <script src="javascripts/main.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+
     <!--[if lt IE 9]>
-      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 
+    <title>Diet by adamhalasz</title>
   </head>
+
   <body>
-
-      <header>
+    <header>
+      <div class="inner">
         <h1>Diet</h1>
-        <p>A minimal plugin based http framework for node.js . Diet will save you development time and make your apps much more efficient.</p>
-      </header>
+        <h2>A minimal plugin based http framework for node.js . Diet will save you development time and make your apps much more efficient.</h2>
+        <a href="https://github.com/adamhalasz/diet" class="button"><small>View project on</small>GitHub</a>
+      </div>
+    </header>
 
-      <div id="banner">
-        <span id="logo"></span>
-
-        <a href="https://github.com/adamhalasz/diet" class="button fork"><strong>View On GitHub</strong></a>
-        <div class="downloads">
-          <span>Downloads:</span>
-          <ul>
-            <li><a href="https://github.com/adamhalasz/diet/zipball/master" class="button">ZIP</a></li>
-            <li><a href="https://github.com/adamhalasz/diet/tarball/master" class="button">TAR</a></li>
-          </ul>
-        </div>
-      </div><!-- end banner -->
-
-    <div class="wrapper">
-      <nav>
-        <ul></ul>
-      </nav>
-      <section>
-        <h1>
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+          <h1>
 <a name="diet" class="anchor" href="#diet"><span class="octicon octicon-link"></span></a><strong>Diet</strong>
 </h1>
 
@@ -93,9 +82,9 @@
 <strong>Global</strong> plugin</li>
 <li>
 <strong>Local</strong> plugin</li>
-</ul><h4>
+</ul><h3>
 <a name="onload-plugins" class="anchor" href="#onload-plugins"><span class="octicon octicon-link"></span></a><strong>Onload Plugins</strong>
-</h4>
+</h3>
 
 <p>Onload plugins <em>run code right away after the plugin was initialized</em>. The use cases of onload plugins are very handy when you want to alter the signal property globally, preprocess data, update caches, schedule/execute background tasks etc.</p>
 
@@ -116,9 +105,9 @@
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">$</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span> <span class="c1">// -&gt; hello world!</span>
 </pre></div>
 
-<h4>
+<h3>
 <a name="global-plugins" class="anchor" href="#global-plugins"><span class="octicon octicon-link"></span></a><strong>Global Plugins</strong>
-</h4>
+</h3>
 
 <p>Global plugins run on all incoming HTTP requests/routes. Global plugins can be handy when you need certain functionalities in all or a specific type of routes for example sessions &amp; static file handling.</p>
 
@@ -154,9 +143,9 @@ curl 'http://localhost:8000/image.jpg'
 -&gt; Extension is .jpg
 </code></pre>
 
-<h4>
+<h3>
 <a name="local-plugins" class="anchor" href="#local-plugins"><span class="octicon octicon-link"></span></a><strong>Local Plugins</strong>
-</h4>
+</h3>
 
 <p>Local plugins run on specified routes. Local plugins are handy for organizing your code for optimization, so each plugin is required only when it is actually needed.</p>
 
@@ -199,13 +188,70 @@ Local plugins can also be created as functions</p>
     <span class="c1">// -&gt; Hi I am Adam, 20 years old.</span>
 <span class="p">});</span>
 </pre></div>
-      </section>
-      <footer>
-        <p>Project maintained by <a href="https://github.com/adamhalasz">adamhalasz</a></p>
-        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></small></p>
-      </footer>
+
+<h3>
+<a name="-signal" class="anchor" href="#-signal"><span class="octicon octicon-link"></span></a><strong>$ Signal</strong>
+</h3>
+
+<p>The signal is diet's namespace in node. There is a global signal variable used in the global context, and there is a signal argument which is used in the plugin's local context.</p>
+
+<p><strong>Example</strong></p>
+
+<div class="highlight highlight-js"><pre>    <span class="nx">$</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'diet'</span><span class="p">);</span>        <span class="c1">// &lt;-- global signal</span>
+    <span class="nx">$</span><span class="p">.</span><span class="nx">http</span><span class="p">(</span><span class="s1">'localhost'</span><span class="p">,</span> <span class="mi">8000</span><span class="p">);</span>  <span class="c1">// &lt;-- using global signal in global scope</span>
+    <span class="nx">$</span><span class="p">.</span><span class="nx">plugin</span><span class="p">(</span><span class="s1">'plugin_name'</span><span class="p">);</span>    
+
+    <span class="nx">$</span><span class="p">(</span><span class="s1">'get / '</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">$</span><span class="p">){</span>  <span class="c1">// &lt;-- signal argument</span>
+        <span class="nx">$</span><span class="p">.</span><span class="nx">end</span><span class="p">(</span><span class="s1">'hello world'</span><span class="p">);</span> <span class="c1">// &lt;-- using local signal in local scope</span>
+    <span class="p">});</span>
+</pre></div>
+
+<p><strong>Global Signal Attributes</strong></p>
+
+<div class="highlight highlight-js"><pre>    <span class="c1">// include a plugin</span>
+    <span class="nx">$</span><span class="p">.</span><span class="nx">plugin</span><span class="p">(</span><span class="s1">'plugin_name'</span><span class="p">,</span> <span class="nx">optionl_async_function</span><span class="p">);</span>     
+
+    <span class="c1">// enable debug mode. `false` by default.</span>
+    <span class="nx">$</span><span class="p">.</span><span class="nx">debug</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span> 
+
+    <span class="c1">// path of your application. `process.cwd()` by default</span>
+    <span class="nx">$</span><span class="p">.</span><span class="nx">path</span><span class="p">;</span>
+
+    <span class="c1">// start accepting incoming http requests.</span>
+    <span class="nx">$</span><span class="p">.</span><span class="nx">http</span><span class="p">(</span><span class="nx">hostname</span><span class="p">,</span> <span class="nx">port</span><span class="p">);</span>
+
+    <span class="c1">// start accepting incoming https requests.</span>
+    <span class="nx">$</span><span class="p">.</span><span class="nx">https</span><span class="p">(</span><span class="nx">hostname</span><span class="p">,</span> <span class="nx">port</span><span class="p">,</span> <span class="nx">certificates</span><span class="p">);</span>
+
+    <span class="c1">// route http(s) requests</span>
+    <span class="nx">$</span><span class="p">(</span><span class="s1">'get /path'</span><span class="p">,</span> <span class="nx">pluginA</span><span class="p">,</span> <span class="nx">pluginB</span> <span class="p">..,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">$</span><span class="p">){</span>
+        <span class="p">...</span>
+    <span class="p">});</span>
+    <span class="c1">// first argument is the method and path. the method can be `get` or `post` followed by a space and the path.</span>
+    <span class="c1">// 'get /page'</span>
+    <span class="c1">// 'post /form'</span>
+    <span class="c1">// the last argument is the ending function</span>
+    <span class="c1">// any argument between the first and last is a local plugin</span>
+</pre></div>
+        </section>
+
+        <aside id="sidebar">
+          <a href="https://github.com/adamhalasz/diet/zipball/master" class="button">
+            <small>Download</small>
+            .zip file
+          </a>
+          <a href="https://github.com/adamhalasz/diet/tarball/master" class="button">
+            <small>Download</small>
+            .tar.gz file
+          </a>
+
+          <p class="repo-owner"><a href="https://github.com/adamhalasz/diet"></a> is maintained by <a href="https://github.com/adamhalasz">adamhalasz</a>.</p>
+
+          <p>This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
+        </aside>
+      </div>
     </div>
-    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
-    
+
+  
   </body>
 </html>
