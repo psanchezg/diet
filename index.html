@@ -62,7 +62,7 @@
 </h2>
 
 <div class="highlight highlight-js"><pre><span class="nx">$</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'diet'</span><span class="p">);</span>
-<span class="nx">$</span><span class="p">.</span><span class="nx">http</span><span class="p">(</span><span class="s1">'localhost'</span><span class="p">,</span> <span class="mi">8000</span><span class="p">);</span>
+<span class="nx">$</span><span class="p">.</span><span class="nx">start</span><span class="p">(</span><span class="s1">'http://localhost:8000'</span><span class="p">);</span>
 <span class="nx">$</span><span class="p">(</span><span class="s1">'GET /'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">$</span><span class="p">){</span> <span class="nx">$</span><span class="p">.</span><span class="nx">end</span><span class="p">(</span><span class="s1">'Hello World!'</span><span class="p">);</span> <span class="p">})</span>
 </pre></div>
 
@@ -110,7 +110,7 @@
 
 <div class="highlight highlight-js"><pre><span class="c1">// project/index.js</span>
 <span class="nx">$</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'diet'</span><span class="p">);</span>    
-<span class="nx">$</span><span class="p">.</span><span class="nx">http</span><span class="p">(</span><span class="s1">'localhost'</span><span class="p">,</span> <span class="mi">8000</span><span class="p">);</span>
+<span class="nx">$</span><span class="p">.</span><span class="nx">start</span><span class="p">(</span><span class="s1">'http://localhost:8000'</span><span class="p">);</span>
 <span class="nx">$</span><span class="p">.</span><span class="nx">plugin</span><span class="p">(</span><span class="s1">'example.js'</span><span class="p">);</span> <span class="c1">// pass a function as the second</span>
                         <span class="c1">// argument for an async callback</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">$</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span> <span class="c1">// -&gt; hello world!</span>
@@ -134,7 +134,7 @@
 
 <div class="highlight highlight-js"><pre><span class="c1">// project/index.js</span>
 <span class="nx">$</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'diet'</span><span class="p">);</span>
-<span class="nx">$</span><span class="p">.</span><span class="nx">http</span><span class="p">(</span><span class="s1">'localhost'</span><span class="p">,</span> <span class="mi">8000</span><span class="p">);</span>
+<span class="nx">$</span><span class="p">.</span><span class="nx">start</span><span class="p">(</span><span class="s1">'http://localhost:8000'</span><span class="p">);</span>
 <span class="nx">$</span><span class="p">.</span><span class="nx">plugin</span><span class="p">(</span><span class="s1">'example.js'</span><span class="p">);</span>
 
 <span class="nx">$</span><span class="p">(</span><span class="s1">'get /'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">$</span><span class="p">){</span>
@@ -172,7 +172,7 @@ curl 'http://localhost:8000/image.jpg'
 
 <div class="highlight highlight-js"><pre><span class="c1">// project/index.js</span>
 <span class="nx">$</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'diet'</span><span class="p">);</span>
-<span class="nx">$</span><span class="p">.</span><span class="nx">http</span><span class="p">(</span><span class="s1">'localhost'</span><span class="p">,</span> <span class="mi">8000</span><span class="p">);</span>
+<span class="nx">$</span><span class="p">.</span><span class="nx">start</span><span class="p">(</span><span class="s1">'http://localhost:8000'</span><span class="p">);</span>
 <span class="kd">var</span> <span class="nx">person</span> <span class="o">=</span> <span class="nx">$</span><span class="p">.</span><span class="nx">plugin</span><span class="p">(</span><span class="s1">'example.js'</span><span class="p">);</span>
 
 <span class="nx">$</span><span class="p">(</span><span class="s1">'get /'</span><span class="p">,</span> <span class="nx">person</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">$</span><span class="p">){</span>
@@ -211,8 +211,8 @@ Local plugins can also be created as functions</p>
 </h2>
 
 <div class="highlight highlight-js"><pre>    <span class="nx">$</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'diet'</span><span class="p">);</span>        <span class="c1">// &lt;-- global signal</span>
-    <span class="nx">$</span><span class="p">.</span><span class="nx">http</span><span class="p">(</span><span class="s1">'localhost'</span><span class="p">,</span> <span class="mi">8000</span><span class="p">);</span>  <span class="c1">// &lt;-- using global signal in global scope</span>
-    <span class="nx">$</span><span class="p">.</span><span class="nx">plugin</span><span class="p">(</span><span class="s1">'plugin_name'</span><span class="p">);</span>    
+    <span class="nx">$</span><span class="p">.</span><span class="nx">start</span><span class="p">(</span><span class="s1">'http://localhost:8000'</span><span class="p">);</span>  
+    <span class="nx">$</span><span class="p">.</span><span class="nx">plugin</span><span class="p">(</span><span class="s1">'plugin_name'</span><span class="p">);</span>    <span class="c1">// &lt;-- using global signal in global scope</span>
 
     <span class="nx">$</span><span class="p">(</span><span class="s1">'get / '</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">$</span><span class="p">){</span>  <span class="c1">// &lt;-- signal argument</span>
         <span class="nx">$</span><span class="p">.</span><span class="nx">end</span><span class="p">(</span><span class="s1">'hello world'</span><span class="p">);</span> <span class="c1">// &lt;-- using local signal in local scope</span>
@@ -232,11 +232,20 @@ Local plugins can also be created as functions</p>
     <span class="c1">// path of your application. `process.cwd()` by default</span>
     <span class="nx">$</span><span class="p">.</span><span class="nx">path</span><span class="p">;</span>
 
-    <span class="c1">// start accepting incoming http requests.</span>
-    <span class="nx">$</span><span class="p">.</span><span class="nx">http</span><span class="p">(</span><span class="nx">hostname</span><span class="p">,</span> <span class="nx">port</span><span class="p">);</span>
+    <span class="c1">// HTTP Server</span>
+    <span class="nx">$</span><span class="p">.</span><span class="nx">start</span><span class="p">(</span><span class="nx">domain</span><span class="p">,</span> <span class="nx">callback</span><span class="p">);</span>
 
-    <span class="c1">// start accepting incoming https requests.</span>
-    <span class="nx">$</span><span class="p">.</span><span class="nx">https</span><span class="p">(</span><span class="nx">hostname</span><span class="p">,</span> <span class="nx">port</span><span class="p">,</span> <span class="nx">certificates</span><span class="p">);</span>
+    <span class="c1">// examples:</span>
+    <span class="c1">// $.start('http://localhost:8000');</span>
+    <span class="c1">// $.start('http://localhost:8000', readyCallback);</span>
+    <span class="c1">// readyCallback is optional</span>
+
+    <span class="c1">// HTTP Server</span>
+    <span class="nx">$</span><span class="p">.</span><span class="nx">start</span><span class="p">(</span><span class="nx">domain</span><span class="p">,</span> <span class="nx">certificates</span><span class="p">,</span> <span class="nx">callback</span><span class="p">);</span>
+
+    <span class="c1">// examples:</span>
+    <span class="c1">// $.start('https://localhost:8000', { ... }, readyCallback);</span>
+    <span class="c1">// readyCallback is optional</span>
 
     <span class="c1">// route http(s) requests</span>
     <span class="nx">$</span><span class="p">(</span><span class="s1">'get /path'</span><span class="p">,</span> <span class="nx">pluginA</span><span class="p">,</span> <span class="nx">pluginB</span> <span class="p">..,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">$</span><span class="p">){</span>
