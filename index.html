@@ -74,9 +74,9 @@
 
 <p><code>npm install diet</code></p>
 
-<h2>
+<h1>
 <a name="diet-plugins" class="anchor" href="#diet-plugins"><span class="octicon octicon-link"></span></a><strong>Diet Plugins</strong>
-</h2>
+</h1>
 
 <p>Plugins are middlewares that act as a bridge between modules and help write much more efficient Object Oriented code. Plugins are essentially regular node.js functions or modules that follow a standard based on diet's <code>$</code> <em>(signal)</em> argument.</p>
 
@@ -93,9 +93,9 @@
 <strong>Global</strong> plugin</li>
 <li>
 <strong>Local</strong> plugin</li>
-</ul><h3>
+</ul><h2>
 <a name="onload-plugins" class="anchor" href="#onload-plugins"><span class="octicon octicon-link"></span></a><strong>Onload Plugins</strong>
-</h3>
+</h2>
 
 <p>Onload plugins <em>run code right away after the plugin was initialized</em>. The use cases of onload plugins are very handy when you want to alter the signal property globally, preprocess data, update caches, schedule/execute background tasks etc.</p>
 
@@ -116,9 +116,9 @@
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">$</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span> <span class="c1">// -&gt; hello world!</span>
 </pre></div>
 
-<h3>
+<h2>
 <a name="global-plugins" class="anchor" href="#global-plugins"><span class="octicon octicon-link"></span></a><strong>Global Plugins</strong>
-</h3>
+</h2>
 
 <p>Global plugins run on all incoming HTTP requests/routes. Global plugins can be handy when you need certain functionalities in all or a specific type of routes for example sessions &amp; static file handling.</p>
 
@@ -154,9 +154,9 @@ curl 'http://localhost:8000/image.jpg'
 -&gt; Extension is .jpg
 </code></pre>
 
-<h3>
+<h2>
 <a name="local-plugins" class="anchor" href="#local-plugins"><span class="octicon octicon-link"></span></a><strong>Local Plugins</strong>
-</h3>
+</h2>
 
 <p>Local plugins run on specified routes. Local plugins are handy for organizing your code for optimization, so each plugin is required only when it is actually needed.</p>
 
@@ -200,9 +200,9 @@ Local plugins can also be created as functions</p>
 <span class="p">});</span>
 </pre></div>
 
-<h3>
+<h2>
 <a name="-signal" class="anchor" href="#-signal"><span class="octicon octicon-link"></span></a><strong>$ Signal</strong>
-</h3>
+</h2>
 
 <p>The signal is diet's namespace in node. There is a global signal variable used in the global context, and there is a signal argument which is used in the plugin's local context.</p>
 
