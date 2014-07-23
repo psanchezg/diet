@@ -102,7 +102,7 @@
 <p><strong>An Example Plugin:</strong></p>
 
 <div class="highlight highlight-js"><pre><span class="c1">// project/example.js</span>
-<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="kd">function</span> <span class="nx">example</span><span class="p">(</span><span class="nx">$</span><span class="p">){</span> 
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">$</span><span class="p">){</span> 
     <span class="nx">$</span><span class="p">.</span><span class="nx">message</span> <span class="o">=</span> <span class="s1">'hello world!'</span><span class="p">;</span>
     <span class="nx">$</span><span class="p">.</span><span class="k">return</span><span class="p">();</span>
 <span class="p">}</span>
@@ -126,7 +126,7 @@
 
 <div class="highlight highlight-js"><pre><span class="c1">// project/example.js</span>
 <span class="kd">var</span> <span class="nx">path</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'path'</span><span class="p">);</span>
-<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span><span class="p">.</span><span class="nx">global</span> <span class="o">=</span> <span class="kd">function</span> <span class="nx">example</span><span class="p">(</span><span class="nx">$</span><span class="p">){</span>
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span><span class="p">.</span><span class="nx">global</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">$</span><span class="p">){</span>
     <span class="k">this</span><span class="p">.</span><span class="nx">extension</span> <span class="o">=</span> <span class="nx">path</span><span class="p">.</span><span class="nx">extname</span><span class="p">(</span><span class="nx">$</span><span class="p">.</span><span class="nx">url</span><span class="p">.</span><span class="nx">href</span><span class="p">);</span>
     <span class="nx">$</span><span class="p">.</span><span class="k">return</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
 <span class="p">}</span>
@@ -163,7 +163,7 @@ curl 'http://localhost:8000/image.jpg'
 <p><strong>Example Local Plugin as a Module:</strong></p>
 
 <div class="highlight highlight-js"><pre><span class="c1">// project/example.js</span>
-<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span><span class="p">.</span><span class="nx">local</span> <span class="o">=</span> <span class="kd">function</span> <span class="nx">person</span><span class="p">(</span><span class="nx">$</span><span class="p">){</span>
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span><span class="p">.</span><span class="nx">local</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">$</span><span class="p">){</span>
     <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="s1">'Adam'</span><span class="p">;</span>
     <span class="k">this</span><span class="p">.</span><span class="nx">age</span> <span class="o">=</span> <span class="mi">20</span><span class="p">;</span>
     <span class="nx">$</span><span class="p">.</span><span class="k">return</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
