@@ -257,6 +257,104 @@ Local plugins can also be created as functions</p>
     <span class="c1">// the last argument is the ending function</span>
     <span class="c1">// any argument between the first and last is a local plugin</span>
 </pre></div>
+
+<h1>
+<a name="routing" class="anchor" href="#routing"><span class="octicon octicon-link"></span></a><strong>Routing</strong>
+</h1>
+
+<p>The global signal is a Function Object. As a function you can use it to setup your applications routes. </p>
+
+<h2>
+<a name="simple-routing" class="anchor" href="#simple-routing"><span class="octicon octicon-link"></span></a><strong>Simple Routing</strong>
+</h2>
+
+<p>Diet supports <code>get</code> and <code>post</code> methods.</p>
+
+<div class="highlight highlight-js"><pre><span class="c1">// examples</span>
+<span class="nx">$</span><span class="p">(</span><span class="s1">'get /'</span><span class="p">,</span> <span class="p">...);</span>            <span class="c1">// GET  http://example.com/</span>
+<span class="nx">$</span><span class="p">(</span><span class="s1">'get /about'</span><span class="p">,</span> <span class="p">...);</span>       <span class="c1">// GET  http://example.com/about</span>
+<span class="nx">$</span><span class="p">(</span><span class="s1">'get /articles'</span><span class="p">,</span> <span class="p">...);</span>    <span class="c1">// GET  http://example.com/articles</span>
+<span class="nx">$</span><span class="p">(</span><span class="s1">'post /article'</span><span class="p">,</span> <span class="p">...);</span>    <span class="c1">// POST http://example.com/article</span>
+</pre></div>
+
+<h2>
+<a name="dynamic-routing" class="anchor" href="#dynamic-routing"><span class="octicon octicon-link"></span></a><strong>Dynamic Routing</strong>
+</h2>
+
+<p>Diet supports Sinatra/Express like dynamic routing. Everything in the route path after <code>:</code> is passed to <code>$.params</code> with the name you provided.</p>
+
+<p><strong>Get user by id</strong>
+As you can see <code>:id</code> becomes <code>$.params.id</code> which holds the value from the URL.</p>
+
+<div class="highlight highlight-js"><pre><span class="nx">$</span><span class="p">(</span><span class="s1">'get /user/:id'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">$</span><span class="p">){</span>
+    <span class="nx">$</span><span class="p">.</span><span class="nx">end</span><span class="p">(</span><span class="s1">'User is '</span> <span class="o">+</span> <span class="nx">$</span><span class="p">.</span><span class="nx">params</span><span class="p">.</span><span class="nx">id</span><span class="p">);</span> 
+<span class="p">});</span>
+<span class="c1">// http://example.com/user/adam</span>
+<span class="c1">// -&gt; User is adam</span>
+</pre></div>
+
+<p><strong>Get calendar by date</strong>
+You can have <strong>multiple params</strong> in a route, each is assigned to the <code>$.params</code> object with the parameter name you provide.</p>
+
+<div class="highlight highlight-js"><pre><span class="c1">// Calendar Date</span>
+<span class="nx">$</span><span class="p">(</span><span class="s1">'get /calendar/:month/:day/:year'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">$</span><span class="p">){</span>
+    <span class="kd">var</span> <span class="nx">message</span> <span class="o">=</span> <span class="nx">$</span><span class="p">.</span><span class="nx">params</span><span class="p">.</span><span class="nx">month</span> <span class="s1">','</span> <span class="o">+</span> <span class="nx">$</span><span class="p">.</span><span class="nx">params</span><span class="p">.</span><span class="nx">day</span> <span class="o">+</span> <span class="s1">','</span> <span class="o">+</span> <span class="nx">$</span><span class="p">.</span><span class="nx">params</span><span class="p">.</span><span class="nx">year</span><span class="p">;</span>
+    <span class="nx">$</span><span class="p">.</span><span class="nx">end</span><span class="p">(</span><span class="nx">message</span><span class="p">);</span>
+<span class="p">});</span>
+<span class="c1">// http://example.com/calendar/05/10/2014</span>
+<span class="c1">// -&gt; 05,10,2014</span>
+</pre></div>
+
+<p><strong>Get a list with a view option</strong>
+If you add <code>?</code> after the param such as <code>:view?</code> it becomes optional.</p>
+
+<div class="highlight highlight-js"><pre><span class="nx">$</span><span class="p">(</span><span class="s1">'get /list/:view?'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">$</span><span class="p">){</span>
+    <span class="k">if</span><span class="p">(</span><span class="nx">$</span><span class="p">.</span><span class="nx">params</span><span class="p">.</span><span class="nx">view</span> <span class="o">==</span> <span class="s1">'gallery'</span><span class="p">){</span>
+        <span class="nx">$</span><span class="p">.</span><span class="nx">end</span><span class="p">(</span><span class="s1">'Display #Gallery View'</span><span class="p">);</span> 
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="nx">$</span><span class="p">.</span><span class="nx">end</span><span class="p">(</span><span class="s1">'Display #List View'</span><span class="p">);</span>
+    <span class="p">}</span>
+
+<span class="p">});</span>
+<span class="c1">// http://example.com/list</span>
+<span class="c1">// -&gt; Display #List View</span>
+
+<span class="c1">// http://example.com/list/gallery</span>
+<span class="c1">// -&gt; Display #Gallery View</span>
+</pre></div>
+
+<h1>
+<a name="domain-control" class="anchor" href="#domain-control"><span class="octicon octicon-link"></span></a><strong>Domain Control</strong>
+</h1>
+
+<p>In some cases you might want to host multiple domains or subdomains with your server. For this case diet has a very simple solution. </p>
+
+<p>The <code>$.start</code> function can be called multiple times. The first one becomes the default server that doesn't require a namespace. After the first one each domain will need it's own namespace.</p>
+
+<div class="highlight highlight-js"><pre><span class="nx">$</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'diet'</span><span class="p">);</span>
+
+<span class="c1">// the first one is default</span>
+<span class="nx">$</span><span class="p">.</span><span class="nx">start</span><span class="p">(</span><span class="s1">'http://example.com'</span><span class="p">);</span> 
+
+<span class="c1">// a namespace is required for any other domain </span>
+<span class="nx">$</span><span class="p">.</span><span class="nx">subdomain</span> <span class="o">=</span> <span class="nx">$</span><span class="p">.</span><span class="nx">start</span><span class="p">(</span><span class="s1">'http://subdomain.example.com'</span><span class="p">);</span>
+<span class="nx">$</span><span class="p">.</span><span class="nx">otherdomain</span> <span class="o">=</span> <span class="nx">$</span><span class="p">.</span><span class="nx">start</span><span class="p">(</span><span class="s1">'http://otherdomain.com'</span><span class="p">);</span>
+
+<span class="c1">// route for example.com</span>
+<span class="nx">$</span><span class="p">(</span><span class="s1">'get /'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">$</span><span class="p">){</span>
+    <span class="nx">$</span><span class="p">.</span><span class="nx">end</span><span class="p">(</span><span class="s1">'hello at example.com'</span><span class="p">);</span>
+<span class="p">});</span>
+
+<span class="c1">// route for subdomain.example.com</span>
+<span class="nx">$</span><span class="p">.</span><span class="nx">subdomain</span><span class="p">(</span><span class="s1">'get /'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">$</span><span class="p">){</span>
+    <span class="nx">$</span><span class="p">.</span><span class="nx">end</span><span class="p">(</span><span class="s1">'hello at subdomain.example.com'</span><span class="p">);</span>
+<span class="p">});</span>
+
+<span class="c1">// route for otherdomain.com</span>
+<span class="nx">$</span><span class="p">.</span><span class="nx">otherdomain</span><span class="p">(</span><span class="s1">'get /'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">$</span><span class="p">){</span>
+    <span class="nx">$</span><span class="p">.</span><span class="nx">end</span><span class="p">(</span><span class="s1">'hello at otherdomain.com'</span><span class="p">);</span>
+<span class="p">});</span>
+</pre></div>
       </section>
       <footer>
         <p>Project maintained by <a href="https://github.com/adamhalasz">adamhalasz</a></p>
