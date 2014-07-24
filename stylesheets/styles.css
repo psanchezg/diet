@@ -503,7 +503,7 @@ table {
 }
 
 body {
-  font: 14px/22px "Quattrocento Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font: 16px/26px "Quattrocento Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   color: #666;
   font-weight: 300;
   margin: 0px;
@@ -526,11 +526,15 @@ h1, h2, h3 {
 
 h1 {
   font-size: 28px;
+  color: #EB592B;
+  padding: 10px 0;
 }
 
 h2 {
   font-size: 24px;
   color: #393939;
+  padding-top: 20px;
+  border-bottom: 1px solid #ddd;
 }
 
 h3, h4, h5, h6 {
@@ -543,7 +547,7 @@ h3 {
 }
 
 a {
-  color: #3399cc;
+  color: #1857DD;
   font-weight: 400;
   text-decoration: none;
 }
@@ -561,7 +565,7 @@ ul {
 
 strong {
   font-weight: bold;
-  color: #333;
+  color: #444;
 }
 
 .wrapper {
@@ -584,11 +588,10 @@ blockquote {
 code {
   font-family: "Lucida Sans", Monaco, Bitstream Vera Sans Mono, Lucida Console, Terminal;
   font-size: 13px;
-  color: #efefef;
-  text-shadow: 0px 1px 0px #000;
+  color: #000000;
   margin: 0 4px;
   padding: 2px 6px;
-  background: #333;
+  background: #D1E1FA;
   -moz-border-radius: 2px;
   -webkit-border-radius: 2px;
   -o-border-radius: 2px;
@@ -780,18 +783,14 @@ section {
   margin: 20px 0;
   margin-top: 30px;
   position: relative;
-  background: #fbfbfb;
+  background: #FFF;
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
   -o-border-radius: 3px;
   -ms-border-radius: 3px;
   -khtml-border-radius: 3px;
   border-radius: 3px;
-  border: 1px solid #cbcbcb;
-  -moz-box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.09), inset 0px 0px 2px 2px rgba(255, 255, 255, 0.5), inset 0 0 5px 5px rgba(255, 255, 255, 0.4);
-  -webkit-box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.09), inset 0px 0px 2px 2px rgba(255, 255, 255, 0.5), inset 0 0 5px 5px rgba(255, 255, 255, 0.4);
-  -o-box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.09), inset 0px 0px 2px 2px rgba(255, 255, 255, 0.5), inset 0 0 5px 5px rgba(255, 255, 255, 0.4);
-  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.09), inset 0px 0px 2px 2px rgba(255, 255, 255, 0.5), inset 0 0 5px 5px rgba(255, 255, 255, 0.4);
+  border: 2px solid #E4E4E4;
 }
 
 small {
@@ -801,7 +800,7 @@ small {
 nav {
   width: 230px;
   position: fixed;
-  top: 220px;
+  top: 60px;
   left: 50%;
   margin-left: -580px;
   text-align: right;
@@ -827,7 +826,6 @@ nav ul li.tag-h2 + .tag-h1 {
   margin-top: 10px;
 }
 nav ul a {
-  color: #666;
 }
 nav ul a:hover {
   color: #999;
