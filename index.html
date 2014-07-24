@@ -283,8 +283,11 @@ Local plugins can also be created as functions</p>
 
 <p>Diet supports Sinatra/Express like dynamic routing. Everything in the route path after <code>:</code> is passed to <code>$.params</code> with the name you provided.</p>
 
-<p><strong>Get user by id</strong>
-As you can see <code>:id</code> becomes <code>$.params.id</code> which holds the value from the URL.</p>
+<h3>
+<a name="get-user-by-id" class="anchor" href="#get-user-by-id"><span class="octicon octicon-link"></span></a><strong>Get user by id</strong>
+</h3>
+
+<p>As you can see <code>:id</code> becomes <code>$.params.id</code> which holds the value from the URL.</p>
 
 <div class="highlight highlight-js"><pre><span class="nx">$</span><span class="p">(</span><span class="s1">'get /user/:id'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">$</span><span class="p">){</span>
     <span class="nx">$</span><span class="p">.</span><span class="nx">end</span><span class="p">(</span><span class="s1">'User is '</span> <span class="o">+</span> <span class="nx">$</span><span class="p">.</span><span class="nx">params</span><span class="p">.</span><span class="nx">id</span><span class="p">);</span> 
@@ -293,8 +296,11 @@ As you can see <code>:id</code> becomes <code>$.params.id</code> which holds the
 <span class="c1">// -&gt; User is adam</span>
 </pre></div>
 
-<p><strong>Get calendar by date</strong>
-You can have <strong>multiple params</strong> in a route, each is assigned to the <code>$.params</code> object with the parameter name you provide.</p>
+<h3>
+<a name="get-calendar-by-date" class="anchor" href="#get-calendar-by-date"><span class="octicon octicon-link"></span></a><strong>Get calendar by date</strong>
+</h3>
+
+<p>You can have <strong>multiple params</strong> in a route, each is assigned to the <code>$.params</code> object with the parameter name you provide.</p>
 
 <div class="highlight highlight-js"><pre><span class="c1">// Calendar Date</span>
 <span class="nx">$</span><span class="p">(</span><span class="s1">'get /calendar/:month/:day/:year'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">$</span><span class="p">){</span>
@@ -305,8 +311,11 @@ You can have <strong>multiple params</strong> in a route, each is assigned to th
 <span class="c1">// -&gt; 05,10,2014</span>
 </pre></div>
 
-<p><strong>Get a list with a view option</strong>
-If you add <code>?</code> after the param such as <code>:view?</code> it becomes optional.</p>
+<h3>
+<a name="get-a-list-with-a-view-option" class="anchor" href="#get-a-list-with-a-view-option"><span class="octicon octicon-link"></span></a><strong>Get a list with a view option</strong>
+</h3>
+
+<p>If you add <code>?</code> after the param such as <code>:view?</code> it becomes optional.</p>
 
 <div class="highlight highlight-js"><pre><span class="nx">$</span><span class="p">(</span><span class="s1">'get /list/:view?'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">$</span><span class="p">){</span>
     <span class="k">if</span><span class="p">(</span><span class="nx">$</span><span class="p">.</span><span class="nx">params</span><span class="p">.</span><span class="nx">view</span> <span class="o">==</span> <span class="s1">'gallery'</span><span class="p">){</span>
