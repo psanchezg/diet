@@ -830,7 +830,7 @@ nav ul li.tag-h2 + .tag-h1 {
 nav ul a {
 }
 nav ul a:hover {
-  color: #999;
+  color: #399AF3 !important;
 }
 
 footer {
