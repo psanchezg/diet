@@ -508,7 +508,7 @@ body {
   font-weight: 300;
   margin: 0px;
   padding: 0px 0 20px 0px;
-  background: #FFF;
+  background: #F5F5F5;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -781,7 +781,7 @@ header p {
 
 section {
   width: 590px;
-  padding: 0 30px 15px 30px;
+  padding: 1px 30px 15px 30px;
   margin: 20px 0;
   margin-top: 30px;
   position: relative;
@@ -792,7 +792,7 @@ section {
   -ms-border-radius: 3px;
   -khtml-border-radius: 3px;
   border-radius: 3px;
-  border: 2px solid #E4E4E4;
+  box-shadow: 0 0 10px #EEE;
 }
 
 small {
