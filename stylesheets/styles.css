@@ -525,15 +525,17 @@ h1, h2, h3 {
 }
 
 h1 {
-  font-size: 28px;
+  font-size: 40px;
   color: #EB592B;
-  padding: 10px 0;
+  padding: 10px 0 0 0;
+  margin-top: 30px;
 }
 
 h2 {
   font-size: 24px;
   color: #393939;
-  padding-top: 20px;
+  padding-top: 30px;
+  padding-bottom: 5px;
   border-bottom: 1px solid #ddd;
 }
 
@@ -547,7 +549,7 @@ h3 {
 }
 
 a {
-  color: #1857DD;
+  color: #9E9E9E;
   font-weight: 400;
   text-decoration: none;
 }
@@ -560,7 +562,8 @@ a small {
 }
 
 ul {
-  list-style-image: url("../images/bullet.png");
+    list-style-type: circle;
+    list-style-type: d;
 }
 
 strong {
@@ -588,6 +591,7 @@ blockquote {
 code {
   font-family: "Lucida Sans", Monaco, Bitstream Vera Sans Mono, Lucida Console, Terminal;
   font-size: 13px;
+  background: #F1F1F1;
   color: #616161;
   margin: 0 4px;
   padding: 2px 6px;
@@ -777,7 +781,7 @@ header p {
 
 section {
   width: 590px;
-  padding: 30px 30px 50px 30px;
+  padding: 0 30px 15px 30px;
   margin: 20px 0;
   margin-top: 30px;
   position: relative;
@@ -818,7 +822,7 @@ nav ul li.tag-h1 {
 }
 nav ul li.tag-h1 a {
   font-weight: bold;
-  color: #333;
+  color: #4D4D4D;
 }
 nav ul li.tag-h2 + .tag-h1 {
   margin-top: 10px;
@@ -889,15 +893,17 @@ footer {
 }
 
 h1 strong{
-  color:orange;
+  color: #E05439;
 }
 
 h2 strong{
-  color:orange;
+  color: #E05439;
+  font-size: 24px;
+  padding-bottom: 10px;
 }
 
 h3 strong{
-  color:orange;
+  color: #E05439;
 }
 @media print, screen and (max-width: 720px) {
   body {
