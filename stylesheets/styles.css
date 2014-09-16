@@ -503,12 +503,12 @@ table {
 }
 
 body {
-  font: 16px/26px "Quattrocento Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font: 14px/22px "Quattrocento Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   color: #666;
   font-weight: 300;
   margin: 0px;
   padding: 0px 0 20px 0px;
-  background: #F5F5F5;
+  background: url(../images/body-background.png) #eae6d1;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -525,18 +525,12 @@ h1, h2, h3 {
 }
 
 h1 {
-  font-size: 40px;
-  color: #EB592B;
-  padding: 10px 0 0 0;
-  margin-top: 30px;
+  font-size: 28px;
 }
 
 h2 {
   font-size: 24px;
   color: #393939;
-  padding-top: 30px;
-  padding-bottom: 5px;
-  border-bottom: 1px solid #ddd;
 }
 
 h3, h4, h5, h6 {
@@ -549,7 +543,7 @@ h3 {
 }
 
 a {
-  color: #9E9E9E;
+  color: #3399cc;
   font-weight: 400;
   text-decoration: none;
 }
@@ -562,13 +556,12 @@ a small {
 }
 
 ul {
-    list-style-type: circle;
-    list-style-type: d;
+  list-style-image: url("../images/bullet.png");
 }
 
 strong {
   font-weight: bold;
-  color: #444;
+  color: #333;
 }
 
 .wrapper {
@@ -591,10 +584,11 @@ blockquote {
 code {
   font-family: "Lucida Sans", Monaco, Bitstream Vera Sans Mono, Lucida Console, Terminal;
   font-size: 13px;
-  background: #F1F1F1;
-  color: #616161;
+  color: #efefef;
+  text-shadow: 0px 1px 0px #000;
   margin: 0 4px;
   padding: 2px 6px;
+  background: #333;
   -moz-border-radius: 2px;
   -webkit-border-radius: 2px;
   -o-border-radius: 2px;
@@ -605,13 +599,14 @@ code {
 
 pre {
   padding: 8px 15px;
-  background: #F1F1F1;
+  background: #333333;
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
   -o-border-radius: 3px;
   -ms-border-radius: 3px;
   -khtml-border-radius: 3px;
   border-radius: 3px;
+  border: 1px solid #c7c7c7;
   overflow: auto;
   overflow-y: hidden;
 }
@@ -656,27 +651,33 @@ dt {
 }
 
 header {
-  padding: 25px 20px 20px 20px;
+  padding: 25px 20px 40px 20px;
   margin: 0;
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
   width: 100%;
   text-align: center;
+  background: url(../images/background.png) #4276b6;
+  -moz-box-shadow: 1px 0px 2px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: 1px 0px 2px rgba(0, 0, 0, 0.75);
+  -o-box-shadow: 1px 0px 2px rgba(0, 0, 0, 0.75);
+  box-shadow: 1px 0px 2px rgba(0, 0, 0, 0.75);
   z-index: 99;
   -webkit-font-smoothing: antialiased;
   min-height: 76px;
-  background: #A83417;
 }
 header h1 {
+  font: 40px/48px "Copse", "Helvetica Neue", Helvetica, Arial, sans-serif;
   color: #f3f3f3;
+  text-shadow: 0px 2px 0px #235796;
   margin: 0px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   -o-text-overflow: ellipsis;
   -ms-text-overflow: ellipsis;
-  font-size: 41px;
 }
 header p {
   color: #d8d8d8;
@@ -686,14 +687,26 @@ header p {
 }
 
 #banner {
+  z-index: 100;
+  left: 0;
+  right: 50%;
   height: 50px;
-  background: #FFFFFF;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  margin-right: -382px;
+  position: fixed;
+  top: 115px;
+  background: #ffcc00;
+  border: 1px solid #f0b500;
+  -moz-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.25);
+  -webkit-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.25);
+  -o-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.25);
+  -moz-border-radius: 0px 2px 2px 0px;
   -webkit-border-radius: 0px 2px 2px 0px;
   -o-border-radius: 0px 2px 2px 0px;
   -ms-border-radius: 0px 2px 2px 0px;
   -khtml-border-radius: 0px 2px 2px 0px;
-  border-radius: 0;
+  border-radius: 0px 2px 2px 0px;
+  padding-right: 10px;
 }
 #banner .button {
   border: 1px solid #dba500;
@@ -723,7 +736,6 @@ header p {
   font-weight: bold;
   display: inline-block;
   text-align: center;
-  float: left;
 }
 #banner .button:hover {
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffe788), color-stop(100%, #ffe788));
@@ -735,18 +747,18 @@ header p {
   background-color: #ffeca0;
 }
 #banner .fork {
-  margin-left: 10px;
+  position: fixed;
+  left: 50%;
+  margin-left: -325px;
   padding: 10px 12px;
   margin-top: 6px;
   line-height: 14px;
   font-size: 14px;
   background-color: #FFE788;
-  margin-right: 20px;
 }
 #banner .downloads {
   float: right;
-  margin: 0 10px 0 0;
-  height: 50px;
+  margin: 0 45px 0 0;
 }
 #banner .downloads span {
   float: left;
@@ -758,7 +770,7 @@ header p {
 }
 #banner ul {
   list-style: none;
-  height: 42px;
+  height: 40px;
   padding: 0;
   float: left;
   margin-left: 10px;
@@ -781,18 +793,22 @@ header p {
 
 section {
   width: 590px;
-  padding: 1px 30px 15px 30px;
+  padding: 30px 30px 50px 30px;
   margin: 20px 0;
-  margin-top: 30px;
+  margin-top: 190px;
   position: relative;
-  background: #FFF;
+  background: #fbfbfb;
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
   -o-border-radius: 3px;
   -ms-border-radius: 3px;
   -khtml-border-radius: 3px;
   border-radius: 3px;
-  box-shadow: 0 0 10px #EEE;
+  border: 1px solid #cbcbcb;
+  -moz-box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.09), inset 0px 0px 2px 2px rgba(255, 255, 255, 0.5), inset 0 0 5px 5px rgba(255, 255, 255, 0.4);
+  -webkit-box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.09), inset 0px 0px 2px 2px rgba(255, 255, 255, 0.5), inset 0 0 5px 5px rgba(255, 255, 255, 0.4);
+  -o-box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.09), inset 0px 0px 2px 2px rgba(255, 255, 255, 0.5), inset 0 0 5px 5px rgba(255, 255, 255, 0.4);
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.09), inset 0px 0px 2px 2px rgba(255, 255, 255, 0.5), inset 0 0 5px 5px rgba(255, 255, 255, 0.4);
 }
 
 small {
@@ -802,7 +818,7 @@ small {
 nav {
   width: 230px;
   position: fixed;
-  top: 60px;
+  top: 220px;
   left: 50%;
   margin-left: -580px;
   text-align: right;
@@ -822,15 +838,16 @@ nav ul li.tag-h1 {
 }
 nav ul li.tag-h1 a {
   font-weight: bold;
-  color: #4D4D4D;
+  color: #333;
 }
 nav ul li.tag-h2 + .tag-h1 {
   margin-top: 10px;
 }
 nav ul a {
+  color: #666;
 }
 nav ul a:hover {
-  color: #399AF3 !important;
+  color: #999;
 }
 
 footer {
@@ -890,20 +907,6 @@ footer {
     bottom: auto;
     width: auto;
   }
-}
-
-h1 strong{
-  color: #E05439;
-}
-
-h2 strong{
-  color: #E05439;
-  font-size: 24px;
-  padding-bottom: 10px;
-}
-
-h3 strong{
-  color: #E05439;
 }
 @media print, screen and (max-width: 720px) {
   body {
