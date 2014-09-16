@@ -39,249 +39,560 @@
         <ul></ul>
       </nav>
       <section>
-        <h1>
-<a name="diet" class="anchor" href="#diet"><span class="octicon octicon-link"></span></a><strong>Diet</strong>
-</h1>
+        <p><a href="https://dietjs.com/"><img src="http://imgur.com/3LBDJRB.png" alt="Diet.js"></a> </p>
 
-<p>Diet is a beautiful, minimalistic, extensible HTTP framework for node.js. When you're code is on diet, your apps become skinny, fast, organized &amp; healthy!</p>
+<p>Fast, plugin based, easy to use HTTP(s) framework for <a href="http://nodejs.org/">node</a></p>
 
-<h2>
-<a name="what-does-diet-do" class="anchor" href="#what-does-diet-do"><span class="octicon octicon-link"></span></a><strong>What does diet do?</strong>
-</h2>
+<p><a href="https://travis-ci.org/adamhalasz/diet"><img src="http://img.shields.io/travis/adamhalasz/diet.svg?style=flat" alt="Build Status"></a> <a href="https://www.npmjs.org/package/diet"><img src="http://img.shields.io/npm/v/diet.svg?style=flat" alt="NPM"></a> <a href="https://www.npmjs.org/package/diet"><img src="http://img.shields.io/npm/dm/diet.svg?style=flat" alt="Downloads"></a> <a href="https://coveralls.io/r/adamhalasz/diet"><img src="http://img.shields.io/coveralls/adamhalasz/diet.svg?style=flat" alt="Coveralls"></a></p>
 
-<ul>
-<li>Diet provides <strong>Plugins</strong> that extend your apps functionality.</li>
-<li>Diet provides <strong>HTTP Routing</strong>.</li>
-<li>Diet provides <strong>HTTP Domain Controlling</strong>.</li>
-<li>Diet provides the <strong><code>$</code> signal argument</strong> that is a combination of the request and response objects. The signal argument holds key informations about the request, and some default functions, like <code>$.end()</code>, <code>$.url</code>, <code>$.query</code>, <code>$.body</code>, <code>$.headers</code>
-</li>
-<li>Diet ships with some powerful basic plugins: <code>sessions</code>,  <code>demands</code>, <code>diet-mysql</code>, <code>diet-accounts</code>, <code>diet-cookies</code>, <code>diet-mail</code>
-</li>
-</ul><h2>
-<a name="hello-world" class="anchor" href="#hello-world"><span class="octicon octicon-link"></span></a><strong>Hello World!</strong>
-</h2>
+<div class="highlight highlight-js"><pre><span class="kd">var</span> <span class="nx">server</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'diet'</span><span class="p">)</span>
 
-<div class="highlight highlight-js"><pre><span class="nx">$</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'diet'</span><span class="p">);</span>
-<span class="nx">$</span><span class="p">.</span><span class="nx">start</span><span class="p">(</span><span class="s1">'http://localhost:8000'</span><span class="p">);</span>
-<span class="nx">$</span><span class="p">(</span><span class="s1">'GET /'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">$</span><span class="p">){</span> <span class="nx">$</span><span class="p">.</span><span class="nx">end</span><span class="p">(</span><span class="s1">'Hello World!'</span><span class="p">);</span> <span class="p">})</span>
+<span class="kd">var</span> <span class="nx">app</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">server</span><span class="p">()</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">domain</span><span class="p">(</span><span class="s1">'http://localhost:8000/'</span><span class="p">)</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">start</span><span class="p">()</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'/'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">$</span><span class="p">){</span>
+    <span class="nx">$</span><span class="p">.</span><span class="nx">end</span><span class="p">(</span><span class="s1">'Hello World!'</span><span class="p">)</span>
+<span class="p">})</span>
+
+<span class="c1">// curl http://localhost/ → Hello World!</span>
 </pre></div>
 
-<p>in just 3 lines.</p>
+<div class="highlight highlight-js"><pre><span class="c1">// 1 line http server</span>
+<span class="nx">require</span><span class="p">(</span><span class="s1">'diet'</span><span class="p">).</span><span class="nx">server</span><span class="p">().</span><span class="nx">start</span><span class="p">().</span><span class="nx">get</span><span class="p">(</span><span class="s1">'/'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">$</span><span class="p">){</span> <span class="nx">$</span><span class="p">.</span><span class="nx">end</span><span class="p">(</span><span class="s1">'yo!'</span><span class="p">)</span> <span class="p">})</span>
+</pre></div>
+
+<h2>
+<a name="why-another-framework" class="anchor" href="#why-another-framework"><span class="octicon octicon-link"></span></a><strong>Why another framework?</strong>
+</h2>
+
+<h4>
+<a name="a-framework-exclusively-for-http-and-https" class="anchor" href="#a-framework-exclusively-for-http-and-https"><span class="octicon octicon-link"></span></a><strong>A framework exclusively for HTTP and HTTPS</strong>
+</h4>
+
+<p>Diet is solely focusing on being a framework for HTTP(s) to serve Requests with Responses. As such diet has <code>Plugins</code> a special module framework designed to reduce the complexity of building application infrastructure and logic by inter-connecting modules with <code>Plugins</code> trough the <code>Router</code>. <strong>This is all what Diet does</strong> regarding it's functionality.</p>
+
+<h4>
+<a name="standardized-but-still-expressive" class="anchor" href="#standardized-but-still-expressive"><span class="octicon octicon-link"></span></a><strong>Standardized but still Expressive</strong>
+</h4>
+
+<p>What is human readable and if it worths is controversial amongst many people. We are drawing a fine line between keeping the method names all written out and try to set the basic namings in stone while making it possible to organize and call all the methods in many different ways.</p>
+
+<h4>
+<a name="easier-to-learn" class="anchor" href="#easier-to-learn"><span class="octicon octicon-link"></span></a><strong>Easier to Learn</strong>
+</h4>
+
+<p>Diet is a project aiming to create the most powerful node.js web application framework with the smallest learning curve.  A wide range of Examples and Tutorials are currently in progress.</p>
+
+<h2>
+<a name="features" class="anchor" href="#features"><span class="octicon octicon-link"></span></a><strong>Features</strong>
+</h2>
+
+<h4>
+<a name="plugins" class="anchor" href="#plugins"><span class="octicon octicon-link"></span></a><strong>Plugins</strong>
+</h4>
+
+<p>Diet has a very powerful modular middleware structure for it's <code>Router</code>. Middlewares in diet allow unlimited series of modules to work together by manipulating and passing data towards the <code>plugin chain</code>. </p>
+
+<p><strong>An example GET Route</strong> 
+assuming <code>db</code>, <code>session</code> and <code>protected</code> is already defined:</p>
+
+<div class="highlight highlight-js"><pre><span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'/settings'</span><span class="p">,</span> <span class="nx">db</span><span class="p">,</span> <span class="nx">session</span><span class="p">,</span> <span class="kr">protected</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">$</span><span class="p">){</span>
+    <span class="nx">$</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">page</span> <span class="o">=</span> <span class="s1">'settings'</span>
+    <span class="nx">$</span><span class="p">.</span><span class="nx">html</span><span class="p">()</span>
+<span class="p">})</span>
+</pre></div>
+
+<ul>
+<li><p><code>the first argument</code> of a route is the <strong>Path</strong>. Everything after the Path is <em>plugin middleware</em> that forms a <em>plugin chain</em></p></li>
+<li><p><code>db</code> instruct this route to create a database connection </p></li>
+<li>
+<code>session</code> grabs the account from the database with the session cookie</li>
+<li>
+<code>protected</code> makes sure the user is logged in. if not redirects the user to <code>GET /accounts/login</code>
+</li>
+<li>
+<code>the last argument</code> terminates the request by sending back the <em>settings</em> html page.</li>
+</ul><h4>
+<a name="url-routing" class="anchor" href="#url-routing"><span class="octicon octicon-link"></span></a><strong>URL Routing</strong>
+</h4>
+
+<p>Smart &amp; easy to use sinatra like routing.</p>
+
+<div class="highlight highlight-js"><pre><span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'/page/about'</span> <span class="p">...)</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'/users/:id/'</span><span class="p">...)</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="s1">'/upload'</span><span class="p">...)</span>
+</pre></div>
+
+<h4>
+<a name="multiple-domain-support" class="anchor" href="#multiple-domain-support"><span class="octicon octicon-link"></span></a><strong>Multiple Domain Support</strong>
+</h4>
+
+<p>Diet can host multiple websites/domains from the same node.js server.</p>
+
+<h4>
+<a name="helpers" class="anchor" href="#helpers"><span class="octicon octicon-link"></span></a><strong>Helpers</strong>
+</h4>
+
+<p>Includes <strong><a href="http://sugarjs.com/">Sugar.js</a></strong> to extend native objects with helpful methods.  </p>
 
 <h2>
 <a name="install" class="anchor" href="#install"><span class="octicon octicon-link"></span></a><strong>Install</strong>
 </h2>
 
-<p><code>npm install diet</code></p>
-
-<h1>
-<a name="diet-plugins" class="anchor" href="#diet-plugins"><span class="octicon octicon-link"></span></a><strong>Diet Plugins</strong>
-</h1>
-
-<p>Plugins are middlewares that act as a bridge between modules and help write much more efficient Object Oriented code. Plugins are essentially regular node.js functions or modules that follow a standard based on diet's <code>$</code> <em>(signal)</em> argument.</p>
-
-<h4>
-<a name="the-3-types-of-plugins" class="anchor" href="#the-3-types-of-plugins"><span class="octicon octicon-link"></span></a><strong>The 3 Types of Plugins</strong>
-</h4>
-
-<p>Plugins may be all or at least one of these types:</p>
-
-<ul>
-<li>
-<strong>Onload</strong> plugin</li>
-<li>
-<strong>Global</strong> plugin</li>
-<li>
-<strong>Local</strong> plugin</li>
-</ul><h2>
-<a name="onload-plugins" class="anchor" href="#onload-plugins"><span class="octicon octicon-link"></span></a><strong>Onload Plugins</strong>
-</h2>
-
-<p>Onload plugins <em>run code right away after the plugin was initialized</em>. The use cases of onload plugins are very handy when you want to alter the signal property globally, preprocess data, update caches, schedule/execute background tasks etc.</p>
-
-<p><strong>An Example Plugin:</strong></p>
-
-<div class="highlight highlight-js"><pre><span class="c1">// project/example.js</span>
-<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">$</span><span class="p">){</span> 
-    <span class="nx">$</span><span class="p">.</span><span class="nx">message</span> <span class="o">=</span> <span class="s1">'hello world!'</span><span class="p">;</span>
-    <span class="nx">$</span><span class="p">.</span><span class="k">return</span><span class="p">();</span>
-<span class="p">}</span>
-</pre></div>
-
-<div class="highlight highlight-js"><pre><span class="c1">// project/index.js</span>
-<span class="nx">$</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'diet'</span><span class="p">);</span>    
-<span class="nx">$</span><span class="p">.</span><span class="nx">start</span><span class="p">(</span><span class="s1">'http://localhost:8000'</span><span class="p">);</span>
-<span class="nx">$</span><span class="p">.</span><span class="nx">plugin</span><span class="p">(</span><span class="s1">'example.js'</span><span class="p">);</span> <span class="c1">// pass a function as the second</span>
-                        <span class="c1">// argument for an async callback</span>
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">$</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span> <span class="c1">// -&gt; hello world!</span>
-</pre></div>
-
-<h2>
-<a name="global-plugins" class="anchor" href="#global-plugins"><span class="octicon octicon-link"></span></a><strong>Global Plugins</strong>
-</h2>
-
-<p>Global plugins run on all incoming HTTP requests/routes. Global plugins can be handy when you need certain functionalities in all or a specific type of routes for example sessions &amp; static file handling.</p>
-
-<p><strong>Example Plugin:</strong></p>
-
-<div class="highlight highlight-js"><pre><span class="c1">// project/example.js</span>
-<span class="kd">var</span> <span class="nx">path</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'path'</span><span class="p">);</span>
-<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span><span class="p">.</span><span class="nx">global</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">$</span><span class="p">){</span>
-    <span class="k">this</span><span class="p">.</span><span class="nx">extension</span> <span class="o">=</span> <span class="nx">path</span><span class="p">.</span><span class="nx">extname</span><span class="p">(</span><span class="nx">$</span><span class="p">.</span><span class="nx">url</span><span class="p">.</span><span class="nx">href</span><span class="p">);</span>
-    <span class="nx">$</span><span class="p">.</span><span class="k">return</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
-<span class="p">}</span>
-</pre></div>
-
-<div class="highlight highlight-js"><pre><span class="c1">// project/index.js</span>
-<span class="nx">$</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'diet'</span><span class="p">);</span>
-<span class="nx">$</span><span class="p">.</span><span class="nx">start</span><span class="p">(</span><span class="s1">'http://localhost:8000'</span><span class="p">);</span>
-<span class="nx">$</span><span class="p">.</span><span class="nx">plugin</span><span class="p">(</span><span class="s1">'example.js'</span><span class="p">);</span>
-
-<span class="nx">$</span><span class="p">(</span><span class="s1">'get /'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">$</span><span class="p">){</span>
-    <span class="nx">$</span><span class="p">.</span><span class="nx">end</span><span class="p">(</span><span class="s1">'Extension is '</span> <span class="o">+</span> <span class="nx">$</span><span class="p">.</span><span class="nx">example</span><span class="p">.</span><span class="nx">extension</span><span class="p">);</span>
-<span class="p">});</span>
-
-<span class="nx">$</span><span class="p">(</span><span class="s1">'get /image.jpg'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">$</span><span class="p">){</span>
-    <span class="nx">$</span><span class="p">.</span><span class="nx">end</span><span class="p">(</span><span class="s1">'Extension is '</span> <span class="o">+</span> <span class="nx">$</span><span class="p">.</span><span class="nx">example</span><span class="p">.</span><span class="nx">extension</span><span class="p">);</span>
-<span class="p">});</span>
-</pre></div>
-
-<pre><code>// terminal
-curl 'http://localhost:8000/'
--&gt; Extension is undefined
-
-curl 'http://localhost:8000/image.jpg'
--&gt; Extension is .jpg
+<pre><code>npm install diet 
 </code></pre>
 
-<h2>
-<a name="local-plugins" class="anchor" href="#local-plugins"><span class="octicon octicon-link"></span></a><strong>Local Plugins</strong>
+<h1>
+<a name="plugin-directory" class="anchor" href="#plugin-directory"><span class="octicon octicon-link"></span></a><strong>Plugin Directory</strong>
+</h1>
+
+<p>We have a list of plugins categorized by their purpose in the wiki: 
+<a href="https://github.com/adamhalasz/diet/wiki/Plugins">https://github.com/adamhalasz/diet/wiki/Plugins</a></p>
+
+<h3>
+<a name="officially-supported-diet-plugins" class="anchor" href="#officially-supported-diet-plugins"><span class="octicon octicon-link"></span></a><strong>Officially Supported Diet Plugins</strong>
+</h3>
+
+<table>
+<thead><tr>
+<th align="left">Plugin</th>
+<th align="left">Category</th>
+<th align="left">Github Docs</th>
+<th align="left">Install</th>
+</tr></thead>
+<tbody>
+<tr>
+<td align="left"><strong>diet-ect</strong></td>
+<td align="left">HTML Templates</td>
+<td align="left"><a href="http://git.io/q4rxng">http://git.io/q4rxng</a></td>
+<td align="left">npm install diet-ect</td>
+</tr>
+<tr>
+<td align="left"><strong>diet-static</strong></td>
+<td align="left">Static Files</td>
+<td align="left"><a href="http://git.io/TMliZw">http://git.io/TMliZw</a></td>
+<td align="left">npm install diet-static</td>
+</tr>
+<tr>
+<td align="left"><strong>diet-mysql</strong></td>
+<td align="left">Database</td>
+<td align="left"><a href="http://git.io/qDgntw">http://git.io/qDgntw</a></td>
+<td align="left">npm install diet-mysql</td>
+</tr>
+<tr>
+<td align="left"><strong>diet-mongo</strong></td>
+<td align="left">Database</td>
+<td align="left"><a href="http://git.io/7nrOOA">http://git.io/7nrOOA</a></td>
+<td align="left">npm install diet-mongo</td>
+</tr>
+<tr>
+<td align="left"><strong>diet-mongoose</strong></td>
+<td align="left">Database</td>
+<td align="left"><a href="http://git.io/XG95jA">http://git.io/XG95jA</a></td>
+<td align="left">npm install diet-mongoose</td>
+</tr>
+<tr>
+<td align="left"><strong>diet-mail</strong></td>
+<td align="left">Email</td>
+<td align="left"><a href="http://git.io/_Ymgkg">http://git.io/_Ymgkg</a></td>
+<td align="left">npm install diet-mail</td>
+</tr>
+<tr>
+<td align="left"><strong>diet-cookies</strong></td>
+<td align="left">Cookies</td>
+<td align="left"><a href="http://git.io/0FIk4A">http://git.io/0FIk4A</a></td>
+<td align="left">npm install diet-cookies</td>
+</tr>
+<tr>
+<td align="left"><strong>diet-auth</strong></td>
+<td align="left">Authentication</td>
+<td align="left"><a href="http://git.io/HDwgJg">http://git.io/HDwgJg</a></td>
+<td align="left">npm install diet-auth</td>
+</tr>
+</tbody>
+</table><h2>
+<a name="hello-html" class="anchor" href="#hello-html"><span class="octicon octicon-link"></span></a><strong>Hello HTML!</strong>
 </h2>
 
-<p>Local plugins run on specified routes. Local plugins are handy for organizing your code for optimization, so each plugin is required only when it is actually needed.</p>
+<p><img src="http://i.imgur.com/M8I3Dp0.png" alt="Complete Hello World example with HTML Template"></p>
 
-<p><strong>Example Local Plugin as a Module:</strong></p>
+<p>Setup a new project in <strong>/project/index.js</strong></p>
 
-<div class="highlight highlight-js"><pre><span class="c1">// project/example.js</span>
-<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span><span class="p">.</span><span class="nx">local</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">$</span><span class="p">){</span>
-    <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="s1">'Adam'</span><span class="p">;</span>
-    <span class="k">this</span><span class="p">.</span><span class="nx">age</span> <span class="o">=</span> <span class="mi">20</span><span class="p">;</span>
-    <span class="nx">$</span><span class="p">.</span><span class="k">return</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
-<span class="p">}</span>
+<div class="highlight highlight-js"><pre><span class="c1">// Require Diet</span>
+<span class="kd">var</span> <span class="nx">server</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'diet'</span><span class="p">)</span>
+
+<span class="c1">// Create an App</span>
+<span class="kd">var</span> <span class="nx">app</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">server</span><span class="p">()</span>
+
+<span class="c1">// Set Domain</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">domain</span><span class="p">(</span><span class="s1">'http://localhost:8000/'</span><span class="p">)</span>
+
+<span class="c1">// Load the HTML Template Engine</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">plugin</span><span class="p">(</span><span class="s1">'diet-ect'</span><span class="p">,</span> <span class="p">{</span> <span class="nx">alias</span><span class="o">:</span> <span class="s1">'html'</span> <span class="p">})</span>   
+
+<span class="c1">// Start the App</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">start</span><span class="p">()</span>
+
+<span class="c1">// Listen on GET /</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'/'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">$</span><span class="p">){</span>
+    <span class="nx">$</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">page</span> <span class="o">=</span> <span class="s1">'home'</span>
+    <span class="nx">$</span><span class="p">.</span><span class="nx">html</span><span class="p">()</span>
+<span class="p">})</span>
 </pre></div>
 
-<div class="highlight highlight-js"><pre><span class="c1">// project/index.js</span>
-<span class="nx">$</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'diet'</span><span class="p">);</span>
-<span class="nx">$</span><span class="p">.</span><span class="nx">start</span><span class="p">(</span><span class="s1">'http://localhost:8000'</span><span class="p">);</span>
-<span class="kd">var</span> <span class="nx">person</span> <span class="o">=</span> <span class="nx">$</span><span class="p">.</span><span class="nx">plugin</span><span class="p">(</span><span class="s1">'example.js'</span><span class="p">);</span>
+<p>And write an HTML view in <strong>/project/static/index.html</strong></p>
 
-<span class="nx">$</span><span class="p">(</span><span class="s1">'get /'</span><span class="p">,</span> <span class="nx">person</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">$</span><span class="p">){</span>
-    <span class="nx">$</span><span class="p">.</span><span class="nx">end</span><span class="p">(</span><span class="s1">'Hi I am '</span> <span class="o">+</span> <span class="nx">$</span><span class="p">.</span><span class="nx">person</span><span class="p">.</span><span class="nx">name</span> <span class="o">+</span> <span class="s1">', '</span>  <span class="o">+</span> <span class="nx">$</span><span class="p">.</span><span class="nx">person</span><span class="p">.</span><span class="nx">age</span> <span class="o">+</span> <span class="s1">' old.'</span><span class="p">);</span>
-    <span class="c1">// -&gt; Hi I am Adam, 20 years old.</span>
-<span class="p">});</span>
-</pre></div>
-
-<p><strong>Example Local Plugin as a Function:</strong>
-Local plugins can also be created as functions</p>
-
-<div class="highlight highlight-js"><pre><span class="c1">// project/index.js</span>
-<span class="nx">$</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'diet'</span><span class="p">);</span>
-<span class="nx">$</span><span class="p">.</span><span class="nx">http</span><span class="p">(</span><span class="s1">'localhost'</span><span class="p">,</span> <span class="mi">8000</span><span class="p">);</span>
-
-<span class="kd">function</span> <span class="nx">person</span><span class="p">(</span><span class="nx">$</span><span class="p">){</span>
-    <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="s1">'Adam'</span><span class="p">;</span>
-    <span class="k">this</span><span class="p">.</span><span class="nx">age</span> <span class="o">=</span> <span class="mi">20</span><span class="p">;</span>
-    <span class="nx">$</span><span class="p">.</span><span class="k">return</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
-<span class="p">}</span>
-
-<span class="nx">$</span><span class="p">(</span><span class="s1">'GET /'</span><span class="p">,</span> <span class="nx">person</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">$</span><span class="p">){</span>
-    <span class="nx">$</span><span class="p">.</span><span class="nx">end</span><span class="p">(</span><span class="s1">'Hi I am, '</span> <span class="o">+</span> <span class="nx">$</span><span class="p">.</span><span class="nx">person</span><span class="p">.</span><span class="nx">name</span> <span class="o">+</span> <span class="s1">', '</span>  <span class="o">+</span> <span class="nx">$</span><span class="p">.</span><span class="nx">person</span><span class="p">.</span><span class="nx">age</span> <span class="o">+</span> <span class="s1">' old'</span><span class="p">);</span>
-    <span class="c1">// -&gt; Hi I am Adam, 20 years old.</span>
-<span class="p">});</span>
+<div class="highlight highlight-html"><pre><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+    <span class="nt">&lt;head&gt;</span>
+        <span class="nt">&lt;title&gt;</span>Hello World<span class="nt">&lt;/title&gt;</span>
+    <span class="nt">&lt;/head&gt;</span>
+    <span class="nt">&lt;body&gt;</span>
+        <span class="nt">&lt;h1&gt;</span>Hello World on the <span class="nt">&lt;u&gt;</span>{{-this.page}}<span class="nt">&lt;/u&gt;</span> page!<span class="nt">&lt;/h1&gt;</span>
+    <span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
 </pre></div>
 
 <h1>
-<a name="-signal" class="anchor" href="#-signal"><span class="octicon octicon-link"></span></a><strong>$ Signal</strong>
+<a name="signal-" class="anchor" href="#signal-"><span class="octicon octicon-link"></span></a><strong>Signal ($)</strong>
 </h1>
 
-<p>The signal is diet's namespace in node. There is a global signal variable used in the global context, and there is a signal argument which is used in the plugin's local context.</p>
+<p>With the default node.js you would have the <code>request</code> and <code>response</code> arguments in your callback when using <code>http.createServer()</code>. </p>
+
+<p>Diet combines these two objects into a single one then adds and fixes some commonly used methods in a more meaningful way for everyday use.</p>
+
+<p>The signal (<code>$</code>) of each route can also be extended with <code>Plugins</code>. Plugins work together seamlessly in diet because the signal (<code>$</code>) object allows to pass data between plugins while keeping plugin namespaces in the signal (<code>$</code>) object. When multiple plugins are assigned to a route they form a <code>plugin chain</code>. The plugin chain is the key to write much less code and still achieve complex tasks. </p>
+
+<p>The handy signal object can be accessed in all the  <code>Routes</code> and <code>Plugins</code> as the first argument as you can see on the examples.</p>
 
 <h2>
 <a name="example" class="anchor" href="#example"><span class="octicon octicon-link"></span></a><strong>Example</strong>
 </h2>
 
-<div class="highlight highlight-js"><pre>    <span class="nx">$</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'diet'</span><span class="p">);</span>        <span class="c1">// &lt;-- global signal</span>
-    <span class="nx">$</span><span class="p">.</span><span class="nx">start</span><span class="p">(</span><span class="s1">'http://localhost:8000'</span><span class="p">);</span>  
-    <span class="nx">$</span><span class="p">.</span><span class="nx">plugin</span><span class="p">(</span><span class="s1">'plugin_name'</span><span class="p">);</span>    <span class="c1">// &lt;-- using global signal in global scope</span>
+<div class="highlight highlight-js"><pre><span class="kd">var</span> <span class="nx">server</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'diet'</span><span class="p">)</span>
 
-    <span class="nx">$</span><span class="p">(</span><span class="s1">'get / '</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">$</span><span class="p">){</span>  <span class="c1">// &lt;-- signal argument</span>
-        <span class="nx">$</span><span class="p">.</span><span class="nx">end</span><span class="p">(</span><span class="s1">'hello world'</span><span class="p">);</span> <span class="c1">// &lt;-- using local signal in local scope</span>
-    <span class="p">});</span>
+<span class="nx">app</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">server</span><span class="p">()</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">domain</span><span class="p">(</span><span class="s1">'http://localhost:8000/'</span><span class="p">)</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">plugin</span><span class="p">(</span><span class="s1">'yo'</span><span class="p">)</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">start</span><span class="p">()</span>   
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'/ '</span><span class="p">,</span> <span class="nx">yo</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">$</span><span class="p">){</span>  <span class="c1">// &lt;-- `$` the dollar sign is the signal object</span>
+    <span class="nx">$</span><span class="p">.</span><span class="nx">end</span><span class="p">(</span><span class="nx">$</span><span class="p">.</span><span class="nx">yo</span><span class="p">.</span><span class="nx">sender</span> <span class="o">+</span> <span class="s1">' says '</span> <span class="o">+</span> <span class="nx">$</span><span class="p">.</span><span class="nx">yo</span><span class="p">.</span><span class="nx">message</span><span class="p">)</span> <span class="c1">// -&gt; John says Yo!</span>
+<span class="p">})</span>
 </pre></div>
 
 <h2>
-<a name="global-signal-attributes" class="anchor" href="#global-signal-attributes"><span class="octicon octicon-link"></span></a><strong>Global Signal Attributes</strong>
+<a name="signal-methods" class="anchor" href="#signal-methods"><span class="octicon octicon-link"></span></a><strong>Signal Methods</strong>
 </h2>
 
-<div class="highlight highlight-js"><pre>    <span class="c1">// include a plugin</span>
-    <span class="nx">$</span><span class="p">.</span><span class="nx">plugin</span><span class="p">(</span><span class="s1">'plugin_name'</span><span class="p">,</span> <span class="nx">configObject</span><span class="p">);</span>     
+<p>This is a list of methods that you can access and use</p>
 
-    <span class="c1">// enable debug mode. `false` by default.</span>
-    <span class="nx">$</span><span class="p">.</span><span class="nx">debug</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span> 
+<table>
+<thead><tr>
+<th align="left">Method</th>
+<th align="left">Type</th>
+<th align="left">Description</th>
+</tr></thead>
+<tbody>
+<tr>
+<td align="left"><strong>$.url</strong></td>
+<td align="left">Object</td>
+<td align="left">JSON Parsed <code>request.url</code>
+</td>
+</tr>
+<tr>
+<td align="left"><strong>$.query</strong></td>
+<td align="left">Object</td>
+<td align="left">JSON Parsed querystring</td>
+</tr>
+<tr>
+<td align="left"><strong>$.params</strong></td>
+<td align="left">Object</td>
+<td align="left">URL params from dynamic page routes like <code>/user/:id</code>
+</td>
+</tr>
+<tr>
+<td align="left"><strong>$.data</strong></td>
+<td align="left">Object</td>
+<td align="left">used in <code>html templates</code> and <code>$.json()</code> responses</td>
+</tr>
+<tr>
+<td align="left"><strong>$.body</strong></td>
+<td align="left">Object</td>
+<td align="left">JSON Parsed POST body data</td>
+</tr>
+<tr>
+<td align="left"><strong>$.headers</strong></td>
+<td align="left">Object</td>
+<td align="left">An object of all the headers.</td>
+</tr>
+<tr>
+<td align="left"><strong>$.header(get, set)</strong></td>
+<td align="left">Function</td>
+<td align="left">Get or Set Headers. The second argument is for SET, if left empty it's GET.</td>
+</tr>
+<tr>
+<td align="left"><strong>$.redirect(path, statusCode)</strong></td>
+<td align="left">Function</td>
+<td align="left">Redirect the request to a different path. <code>path</code> is requried, <code>statusCode</code> is optional.</td>
+</tr>
+<tr>
+<td align="left"><strong>$.end(message)</strong></td>
+<td align="left">Function</td>
+<td align="left">End the response with an optional <code>message</code>
+</td>
+</tr>
+<tr>
+<td align="left"><strong>$.chain()</strong></td>
+<td align="left">Function</td>
+<td align="left">Create a plugin chain manually on the fly inside a route</td>
+</tr>
+<tr>
+<td align="left"><strong>$.method</strong></td>
+<td align="left">String</td>
+<td align="left">The method of the request it's eiher GET or POST</td>
+</tr>
+<tr>
+<td align="left"><strong>$.multipart</strong></td>
+<td align="left">Boolean</td>
+<td align="left">Check if a POST request's enctype is is multipart or not. The value is a boolean: <code>true</code> or <code>false</code>.</td>
+</tr>
+<tr>
+<td align="left"><strong>$.noRoute</strong></td>
+<td align="left">Boolean</td>
+<td align="left">Check if a request has a matching registered route from <code>app.get</code> or <code>app.post</code>. The value is a boolean: <code>true</code> or <code>false</code>.</td>
+</tr>
+</tbody>
+</table><h4>
+<a name="url---object" class="anchor" href="#url---object"><span class="octicon octicon-link"></span></a>
+<strong>$.url</strong> - <em>object</em>
+</h4>
 
-    <span class="c1">// path of your application. `process.cwd()` by default</span>
-    <span class="nx">$</span><span class="p">.</span><span class="nx">path</span><span class="p">;</span>
+<p>JSON Parsed <code>request.url</code></p>
 
-    <span class="c1">// HTTP Server</span>
-    <span class="nx">$</span><span class="p">.</span><span class="nx">start</span><span class="p">(</span><span class="nx">domain</span><span class="p">,</span> <span class="nx">callback</span><span class="p">);</span>
-
-    <span class="c1">// examples:</span>
-    <span class="c1">// $.start('http://localhost:8000');</span>
-    <span class="c1">// $.start('http://localhost:8000', readyCallback);</span>
-    <span class="c1">// readyCallback is optional</span>
-
-    <span class="c1">// HTTP Server</span>
-    <span class="nx">$</span><span class="p">.</span><span class="nx">start</span><span class="p">(</span><span class="nx">domain</span><span class="p">,</span> <span class="nx">certificates</span><span class="p">,</span> <span class="nx">callback</span><span class="p">);</span>
-
-    <span class="c1">// examples:</span>
-    <span class="c1">// $.start('https://localhost:8000', { ... }, readyCallback);</span>
-    <span class="c1">// readyCallback is optional</span>
-
-    <span class="c1">// route http(s) requests</span>
-    <span class="nx">$</span><span class="p">(</span><span class="s1">'get /path'</span><span class="p">,</span> <span class="nx">pluginA</span><span class="p">,</span> <span class="nx">pluginB</span> <span class="p">..,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">$</span><span class="p">){</span>
-        <span class="p">...</span>
-    <span class="p">});</span>
-    <span class="c1">// first argument is the method and path. the method can be `get` or `post` followed by a space and the path.</span>
-    <span class="c1">// 'get /page'</span>
-    <span class="c1">// 'post /form'</span>
-    <span class="c1">// the last argument is the ending function</span>
-    <span class="c1">// any argument between the first and last is a local plugin</span>
+<div class="highlight highlight-js"><pre><span class="nx">$</span><span class="p">.</span><span class="nx">url</span> <span class="o">=</span> <span class="p">{</span> 
+    <span class="nx">protocol</span><span class="o">:</span> <span class="s1">'http:'</span><span class="p">,</span>
+    <span class="nx">slashes</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="nx">host</span><span class="o">:</span> <span class="s1">'example.com'</span><span class="p">,</span>
+    <span class="nx">hostname</span><span class="o">:</span> <span class="s1">'example.com'</span><span class="p">,</span>
+    <span class="nx">href</span><span class="o">:</span> <span class="s1">'http://example.com/'</span><span class="p">,</span>
+    <span class="nx">pathname</span><span class="o">:</span> <span class="s1">'/'</span><span class="p">,</span>
+    <span class="nx">path</span><span class="o">:</span> <span class="s1">'/'</span> <span class="p">}</span>
 </pre></div>
+
+<h4>
+<a name="query---object" class="anchor" href="#query---object"><span class="octicon octicon-link"></span></a>
+<strong>$.query</strong> - <em>object</em>
+</h4>
+
+<p>JSON Parsed querystring</p>
+
+<div class="highlight highlight-js"><pre><span class="c1">// http://example.com/?query=value</span>
+<span class="nx">$</span><span class="p">.</span><span class="nx">query</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">query</span><span class="o">:</span> <span class="s1">'value'</span> <span class="p">}</span>
+</pre></div>
+
+<h4>
+<a name="params---object" class="anchor" href="#params---object"><span class="octicon octicon-link"></span></a>
+<strong>$.params</strong> - <em>object</em>
+</h4>
+
+<p>URL params from dynamic page routes like <code>/user/:id</code></p>
+
+<div class="highlight highlight-js"><pre><span class="c1">// GET http://example.com/user/eddie</span>
+<span class="nx">$</span><span class="p">.</span><span class="nx">params</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">id</span><span class="o">:</span> <span class="s1">'eddie'</span> <span class="p">}</span>
+</pre></div>
+
+<h4>
+<a name="data---object" class="anchor" href="#data---object"><span class="octicon octicon-link"></span></a>
+<strong>$.data</strong> - <em>object</em>
+</h4>
+
+<p>an object used in html templates and <code>$.json()</code> responses</p>
+
+<div class="highlight highlight-js"><pre><span class="nx">$</span><span class="p">.</span><span class="nx">data</span> <span class="o">=</span> <span class="p">{}</span>
+</pre></div>
+
+<h4>
+<a name="body---object" class="anchor" href="#body---object"><span class="octicon octicon-link"></span></a>
+<strong>$.body</strong> - <em>object</em>
+</h4>
+
+<p>JSON Parsed POST body data</p>
+
+<div class="highlight highlight-js"><pre><span class="c1">// POST http://example.com/?message=hello</span>
+<span class="nx">$</span><span class="p">.</span><span class="nx">body</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">message</span><span class="o">:</span> <span class="s1">'hello'</span> <span class="p">}</span>
+</pre></div>
+
+<h4>
+<a name="headers---object" class="anchor" href="#headers---object"><span class="octicon octicon-link"></span></a>
+<strong>$.headers</strong> - <em>object</em>
+</h4>
+
+<p>An object of all headers.</p>
+
+<div class="highlight highlight-js"><pre><span class="nx">$</span><span class="p">.</span><span class="nx">headers</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">host</span><span class="o">:</span> <span class="s1">'example.com'</span><span class="p">,</span>
+  <span class="nx">connection</span><span class="o">:</span> <span class="s1">'keep-alive'</span><span class="p">,</span>
+  <span class="nx">accept</span><span class="o">:</span> <span class="s1">'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8'</span><span class="p">,</span>
+  <span class="s1">'user-agent'</span><span class="o">:</span> <span class="s1">'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1985.125 Safari/537.36'</span><span class="p">,</span>
+  <span class="s1">'accept-encoding'</span><span class="o">:</span> <span class="s1">'gzip,deflate,sdch'</span><span class="p">,</span>
+  <span class="s1">'accept-language'</span><span class="o">:</span> <span class="s1">'en-US,en;q=0.8,da;q=0.6,hu;q=0.4'</span><span class="p">,</span>
+  <span class="nx">cookie</span><span class="o">:</span> <span class="s1">'id=999'</span> <span class="p">}</span>
+</pre></div>
+
+<h4>
+<a name="headerget-set---function" class="anchor" href="#headerget-set---function"><span class="octicon octicon-link"></span></a>
+<strong>$.header(get, set)</strong> - <em>function</em>
+</h4>
+
+<p>Get or Set Headers. The second argument is for SET, if left empty it's GET. </p>
+
+<div class="highlight highlight-js"><pre><span class="nx">$</span><span class="p">.</span><span class="nx">header</span><span class="p">(</span><span class="s1">'cookie'</span><span class="p">)</span>                    <span class="c1">// GET `cookie` -&gt; 'id=999'</span>
+<span class="nx">$</span><span class="p">.</span><span class="nx">header</span><span class="p">(</span><span class="s1">'content-type'</span><span class="p">,</span> <span class="s1">'text/html'</span><span class="p">)</span> <span class="c1">// SET `content-type` to `text/html`</span>
+</pre></div>
+
+<h4>
+<a name="redirectpath-statuscode---function" class="anchor" href="#redirectpath-statuscode---function"><span class="octicon octicon-link"></span></a>
+<strong>$.redirect(path, statusCode)</strong> - <em>function</em>
+</h4>
+
+<p>Redirect the request to a different path. <code>path</code> is requried, <code>statusCode</code> is optional.</p>
+
+<p><strong>Redirect to a Path</strong></p>
+
+<div class="highlight highlight-js"><pre><span class="nx">$</span><span class="p">.</span><span class="nx">redirect</span><span class="p">(</span><span class="s1">'/to/some/path'</span><span class="p">)</span>        <span class="c1">// internal redirect </span>
+<span class="nx">$</span><span class="p">.</span><span class="nx">redirect</span><span class="p">(</span><span class="s1">'http://google.com/'</span><span class="p">)</span>   <span class="c1">// external redirect</span>
+</pre></div>
+
+<p><strong>Redirect Home</strong></p>
+
+<div class="highlight highlight-js"><pre><span class="c1">// redirect to home</span>
+<span class="nx">$</span><span class="p">.</span><span class="nx">redirect</span><span class="p">(</span><span class="s1">'home'</span><span class="p">)</span>
+</pre></div>
+
+<div class="highlight highlight-js"><pre><span class="c1">// is the same as</span>
+<span class="nx">$</span><span class="p">.</span><span class="nx">redirect</span><span class="p">(</span><span class="s1">'/'</span><span class="p">)</span>
+</pre></div>
+
+<p><strong>Redirect Back</strong></p>
+
+<div class="highlight highlight-js"><pre><span class="c1">// redirect back</span>
+<span class="nx">$</span><span class="p">.</span><span class="nx">redirect</span><span class="p">(</span><span class="s1">'back'</span><span class="p">)</span>
+</pre></div>
+
+<div class="highlight highlight-js"><pre><span class="c1">// is the same as</span>
+<span class="nx">$</span><span class="p">.</span><span class="nx">redirect</span><span class="p">(</span><span class="nx">$</span><span class="p">.</span><span class="nx">request</span><span class="p">.</span><span class="nx">headers</span><span class="p">.</span><span class="nx">referer</span><span class="p">)</span>
+</pre></div>
+
+<h4>
+<a name="method---string" class="anchor" href="#method---string"><span class="octicon octicon-link"></span></a>
+<strong>$.method</strong> - <em>string</em>
+</h4>
+
+<p>A string that you can use to check the method of the request. It's either GET or POST.</p>
+
+<div class="highlight highlight-js"><pre><span class="c1">// GET http://example.com/</span>
+<span class="nx">$</span><span class="p">.</span><span class="nx">method</span> <span class="c1">// -&gt; GET</span>
+
+<span class="c1">// POST http://example.com/publish</span>
+<span class="nx">$</span><span class="p">.</span><span class="nx">method</span> <span class="c1">// -&gt; POST</span>
+</pre></div>
+
+<h4>
+<a name="endmessage---function" class="anchor" href="#endmessage---function"><span class="octicon octicon-link"></span></a>
+<strong>$.end(message)</strong> - <em>function</em>
+</h4>
+
+<p>A function that ends the response and send back data to the requesting device.</p>
+
+<div class="highlight highlight-js"><pre><span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'/'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">$</span><span class="p">){</span>
+    <span class="nx">$</span><span class="p">.</span><span class="nx">end</span><span class="p">(</span><span class="s1">'end response'</span><span class="p">)</span>
+<span class="p">})</span>
+</pre></div>
+
+<h4>
+<a name="chain---function" class="anchor" href="#chain---function"><span class="octicon octicon-link"></span></a>
+<strong>$.chain()</strong> - <em>function</em>
+</h4>
+
+<p>Creates a plugin chain manually on the fly inside a route. This is useuful when you would like a create shortcut plugin that runs several other ones.</p>
+
+<h5>
+<a name="methods" class="anchor" href="#methods"><span class="octicon octicon-link"></span></a><strong>Methods</strong>
+</h5>
+
+<table>
+<thead><tr>
+<th align="left">Method</th>
+<th align="left">Description</th>
+</tr></thead>
+<tbody>
+<tr>
+<td align="left"><strong>chain.plugin(pluginName, pluginPath)</strong></td>
+<td align="left">Add a plugin to the chain</td>
+</tr>
+<tr>
+<td align="left"><strong>chain.load(readyCallback)</strong></td>
+<td align="left">Load the plugins into the chain in one-by-one after each other. readyCallback runs when all the plugins are ready.</td>
+</tr>
+</tbody>
+</table><div class="highlight highlight-js"><pre><span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'/'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">$</span><span class="p">){</span>
+    <span class="kd">var</span> <span class="nx">chain</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">$</span><span class="p">.</span><span class="nx">chain</span><span class="p">()</span>
+    <span class="nx">chain</span><span class="p">.</span><span class="nx">plugin</span><span class="p">(</span><span class="s1">'db'</span><span class="p">,</span> <span class="nx">app</span><span class="p">.</span><span class="nx">db</span><span class="p">)</span>
+    <span class="nx">chain</span><span class="p">.</span><span class="nx">plugin</span><span class="p">(</span><span class="s1">'session'</span><span class="p">,</span> <span class="nx">app</span><span class="p">.</span><span class="nx">session</span><span class="p">)</span>
+    <span class="nx">chain</span><span class="p">.</span><span class="nx">plugin</span><span class="p">(</span><span class="s1">'notifications'</span><span class="p">,</span> <span class="nx">app</span><span class="p">.</span><span class="nx">alerts</span><span class="p">)</span>
+    <span class="nx">chain</span><span class="p">.</span><span class="nx">load</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+        <span class="nx">$</span><span class="p">.</span><span class="nx">end</span><span class="p">())</span>
+    <span class="p">})</span>
+<span class="p">})</span>
+</pre></div>
+
+<h4>
+<a name="multipart---boolean" class="anchor" href="#multipart---boolean"><span class="octicon octicon-link"></span></a>
+<strong>$.multipart</strong> - <em>boolean</em>
+</h4>
+
+<p>Check if a POST request's enctype is is multipart or not. The value is a boolean: <code>true</code> or <code>false</code>.</p>
+
+<h4>
+<a name="noroute---boolean" class="anchor" href="#noroute---boolean"><span class="octicon octicon-link"></span></a>
+<strong>$.noRoute</strong> - <em>boolean</em>
+</h4>
+
+<p>Check if a request has a matching registered route from <code>app.get</code> or <code>app.post</code>. The value is a boolean: <code>true</code> or <code>false</code>.</p>
 
 <h1>
 <a name="routing" class="anchor" href="#routing"><span class="octicon octicon-link"></span></a><strong>Routing</strong>
 </h1>
 
-<p>The global signal is a Function Object. As a function you can use it to setup your applications routes. </p>
+<p>Routing is the method that we describe when we pre-register a response to an anticipated incoming request from a client like a web browser, mobile or desktop app. In other words Routing is the way to prepare your app for the battle.</p>
+
+<p>In this section I'm going to discuss the 2 supported <code>http methods</code>,  <code>get</code> and <code>post</code> and show examples of <code>simple routing</code> and <code>dynamic</code> routing using the <code>path</code> argument.</p>
 
 <h2>
 <a name="simple-routing" class="anchor" href="#simple-routing"><span class="octicon octicon-link"></span></a><strong>Simple Routing</strong>
 </h2>
 
-<p>Diet supports <code>get</code> and <code>post</code> methods.</p>
+<p>Diet supports the <code>get</code> and <code>post</code>  routing methods.</p>
 
-<div class="highlight highlight-js"><pre><span class="c1">// examples</span>
-<span class="nx">$</span><span class="p">(</span><span class="s1">'get /'</span><span class="p">,</span> <span class="p">...);</span>            <span class="c1">// GET  http://example.com/</span>
-<span class="nx">$</span><span class="p">(</span><span class="s1">'get /about'</span><span class="p">,</span> <span class="p">...);</span>       <span class="c1">// GET  http://example.com/about</span>
-<span class="nx">$</span><span class="p">(</span><span class="s1">'get /articles'</span><span class="p">,</span> <span class="p">...);</span>    <span class="c1">// GET  http://example.com/articles</span>
-<span class="nx">$</span><span class="p">(</span><span class="s1">'post /article'</span><span class="p">,</span> <span class="p">...);</span>    <span class="c1">// POST http://example.com/article</span>
+<div class="highlight highlight-js"><pre><span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'/'</span><span class="p">,</span> <span class="p">...)</span>            
+<span class="c1">// curl http://example.com/</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'/about'</span><span class="p">,</span> <span class="p">...)</span>       
+<span class="c1">// curl  http://example.com/about</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'/article/:id'</span><span class="p">,</span> <span class="p">...)</span>    
+<span class="c1">// curl http://example.com/articles/89934</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="s1">'/profile'</span><span class="p">,</span> <span class="p">...)</span>     
+<span class="c1">// curl -X POST http://example.com/profile</span>
 </pre></div>
 
 <h2>
 <a name="dynamic-routing" class="anchor" href="#dynamic-routing"><span class="octicon octicon-link"></span></a><strong>Dynamic Routing</strong>
 </h2>
 
-<p>Diet supports Sinatra/Express like dynamic routing. Everything in the route path after <code>:</code> is passed to <code>$.params</code> with the name you provided.</p>
+<p>Diet supports Sinatra like dynamic routing. Everything in the route path after <code>:</code> is passed to <code>$.params</code> with the name you provided.</p>
 
 <h3>
 <a name="get-user-by-id" class="anchor" href="#get-user-by-id"><span class="octicon octicon-link"></span></a><strong>Get user by id</strong>
@@ -289,9 +600,9 @@ Local plugins can also be created as functions</p>
 
 <p>As you can see <code>:id</code> becomes <code>$.params.id</code> which holds the value from the URL.</p>
 
-<div class="highlight highlight-js"><pre><span class="nx">$</span><span class="p">(</span><span class="s1">'get /user/:id'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">$</span><span class="p">){</span>
-    <span class="nx">$</span><span class="p">.</span><span class="nx">end</span><span class="p">(</span><span class="s1">'User is '</span> <span class="o">+</span> <span class="nx">$</span><span class="p">.</span><span class="nx">params</span><span class="p">.</span><span class="nx">id</span><span class="p">);</span> 
-<span class="p">});</span>
+<div class="highlight highlight-js"><pre><span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'/user/:id'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">$</span><span class="p">){</span>
+    <span class="nx">$</span><span class="p">.</span><span class="nx">end</span><span class="p">(</span><span class="s1">'User is '</span> <span class="o">+</span> <span class="nx">$</span><span class="p">.</span><span class="nx">params</span><span class="p">.</span><span class="nx">id</span><span class="p">)</span> 
+<span class="p">})</span>
 <span class="c1">// http://example.com/user/adam</span>
 <span class="c1">// -&gt; User is adam</span>
 </pre></div>
@@ -303,10 +614,10 @@ Local plugins can also be created as functions</p>
 <p>You can have <strong>multiple params</strong> in a route, each is assigned to the <code>$.params</code> object with the parameter name you provide.</p>
 
 <div class="highlight highlight-js"><pre><span class="c1">// Calendar Date</span>
-<span class="nx">$</span><span class="p">(</span><span class="s1">'get /calendar/:month/:day/:year'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">$</span><span class="p">){</span>
-    <span class="kd">var</span> <span class="nx">message</span> <span class="o">=</span> <span class="nx">$</span><span class="p">.</span><span class="nx">params</span><span class="p">.</span><span class="nx">month</span> <span class="s1">','</span> <span class="o">+</span> <span class="nx">$</span><span class="p">.</span><span class="nx">params</span><span class="p">.</span><span class="nx">day</span> <span class="o">+</span> <span class="s1">','</span> <span class="o">+</span> <span class="nx">$</span><span class="p">.</span><span class="nx">params</span><span class="p">.</span><span class="nx">year</span><span class="p">;</span>
-    <span class="nx">$</span><span class="p">.</span><span class="nx">end</span><span class="p">(</span><span class="nx">message</span><span class="p">);</span>
-<span class="p">});</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'/calendar/:month/:day/:year'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">$</span><span class="p">){</span>
+    <span class="kd">var</span> <span class="nx">message</span> <span class="o">=</span> <span class="nx">$</span><span class="p">.</span><span class="nx">params</span><span class="p">.</span><span class="nx">month</span> <span class="s1">','</span> <span class="o">+</span> <span class="nx">$</span><span class="p">.</span><span class="nx">params</span><span class="p">.</span><span class="nx">day</span> <span class="o">+</span> <span class="s1">','</span> <span class="o">+</span> <span class="nx">$</span><span class="p">.</span><span class="nx">params</span><span class="p">.</span><span class="nx">year</span>
+    <span class="nx">$</span><span class="p">.</span><span class="nx">end</span><span class="p">(</span><span class="nx">message</span><span class="p">)</span>
+<span class="p">})</span>
 <span class="c1">// http://example.com/calendar/05/10/2014</span>
 <span class="c1">// -&gt; 05,10,2014</span>
 </pre></div>
@@ -317,14 +628,14 @@ Local plugins can also be created as functions</p>
 
 <p>If you add <code>?</code> after the param such as <code>:view?</code> it becomes optional.</p>
 
-<div class="highlight highlight-js"><pre><span class="nx">$</span><span class="p">(</span><span class="s1">'get /list/:view?'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">$</span><span class="p">){</span>
+<div class="highlight highlight-js"><pre><span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'/list/:view?'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">$</span><span class="p">){</span>
     <span class="k">if</span><span class="p">(</span><span class="nx">$</span><span class="p">.</span><span class="nx">params</span><span class="p">.</span><span class="nx">view</span> <span class="o">==</span> <span class="s1">'gallery'</span><span class="p">){</span>
-        <span class="nx">$</span><span class="p">.</span><span class="nx">end</span><span class="p">(</span><span class="s1">'Display #Gallery View'</span><span class="p">);</span> 
+        <span class="nx">$</span><span class="p">.</span><span class="nx">end</span><span class="p">(</span><span class="s1">'Display #Gallery View'</span><span class="p">)</span> 
     <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-        <span class="nx">$</span><span class="p">.</span><span class="nx">end</span><span class="p">(</span><span class="s1">'Display #List View'</span><span class="p">);</span>
+        <span class="nx">$</span><span class="p">.</span><span class="nx">end</span><span class="p">(</span><span class="s1">'Display #List View'</span><span class="p">)</span>
     <span class="p">}</span>
 
-<span class="p">});</span>
+<span class="p">})</span>
 <span class="c1">// http://example.com/list</span>
 <span class="c1">// -&gt; Display #List View</span>
 
@@ -332,38 +643,324 @@ Local plugins can also be created as functions</p>
 <span class="c1">// -&gt; Display #Gallery View</span>
 </pre></div>
 
+<h2>
+<a name="when-to-use-get-or-post" class="anchor" href="#when-to-use-get-or-post"><span class="octicon octicon-link"></span></a><strong>When to use GET or POST?</strong>
+</h2>
+
+<h4>
+<a name="the-get-method" class="anchor" href="#the-get-method"><span class="octicon octicon-link"></span></a><strong>The GET Method</strong>
+</h4>
+
+<p>HTTP GET promotes URI addressability so, designers should adopt it for safe operations such as simple queries. </p>
+
+<ul>
+<li>GET requests can be cached</li>
+<li>GET requests remain in the browser history</li>
+<li>GET requests can be bookmarked</li>
+<li>GET requests should never be used when dealing with sensitive data</li>
+<li>GET requests have length restrictions</li>
+<li>GET requests should be used only to retrieve data</li>
+</ul><h4>
+<a name="the-post-method" class="anchor" href="#the-post-method"><span class="octicon octicon-link"></span></a><strong>The POST Method</strong>
+</h4>
+
+<p>POST is appropriate for other types of applications where a user request has the potential to change the state of the resource (or of related resources).</p>
+
+<ul>
+<li>POST requests are never cached</li>
+<li>POST requests do not remain in the browser history</li>
+<li>POST requests cannot be bookmarked</li>
+<li>POST requests have no restrictions on data length</li>
+</ul><p>Check out <a href="http://www.w3.org/2001/tag/doc/whenToUseGet.html">W3C</a> for more details:</p>
+
 <h1>
-<a name="domain-control" class="anchor" href="#domain-control"><span class="octicon octicon-link"></span></a><strong>Domain Control</strong>
+<a name="domains" class="anchor" href="#domains"><span class="octicon octicon-link"></span></a><strong>Domains</strong>
 </h1>
 
-<p>In some cases you might want to host multiple domains or subdomains with your server. For this case diet has a very simple solution. </p>
+<p>In some cases you might want to serve multiple domains with the same node.js application. Diet handles this beautifully. </p>
 
-<p>The <code>$.start</code> function can be called multiple times. The first one becomes the default server that doesn't require a namespace. After the first one each domain will need it's own namespace.</p>
+<h2>
+<a name="simple-single-domain" class="anchor" href="#simple-single-domain"><span class="octicon octicon-link"></span></a><strong>Simple Single Domain:</strong>
+</h2>
 
-<div class="highlight highlight-js"><pre><span class="nx">$</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'diet'</span><span class="p">);</span>
-
-<span class="c1">// the first one is default</span>
-<span class="nx">$</span><span class="p">.</span><span class="nx">start</span><span class="p">(</span><span class="s1">'http://example.com'</span><span class="p">);</span> 
-
-<span class="c1">// a namespace is required for any other domain </span>
-<span class="nx">$</span><span class="p">.</span><span class="nx">subdomain</span> <span class="o">=</span> <span class="nx">$</span><span class="p">.</span><span class="nx">start</span><span class="p">(</span><span class="s1">'http://subdomain.example.com'</span><span class="p">);</span>
-<span class="nx">$</span><span class="p">.</span><span class="nx">otherdomain</span> <span class="o">=</span> <span class="nx">$</span><span class="p">.</span><span class="nx">start</span><span class="p">(</span><span class="s1">'http://otherdomain.com'</span><span class="p">);</span>
-
-<span class="c1">// route for example.com</span>
-<span class="nx">$</span><span class="p">(</span><span class="s1">'get /'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">$</span><span class="p">){</span>
-    <span class="nx">$</span><span class="p">.</span><span class="nx">end</span><span class="p">(</span><span class="s1">'hello at example.com'</span><span class="p">);</span>
-<span class="p">});</span>
-
-<span class="c1">// route for subdomain.example.com</span>
-<span class="nx">$</span><span class="p">.</span><span class="nx">subdomain</span><span class="p">(</span><span class="s1">'get /'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">$</span><span class="p">){</span>
-    <span class="nx">$</span><span class="p">.</span><span class="nx">end</span><span class="p">(</span><span class="s1">'hello at subdomain.example.com'</span><span class="p">);</span>
-<span class="p">});</span>
-
-<span class="c1">// route for otherdomain.com</span>
-<span class="nx">$</span><span class="p">.</span><span class="nx">otherdomain</span><span class="p">(</span><span class="s1">'get /'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">$</span><span class="p">){</span>
-    <span class="nx">$</span><span class="p">.</span><span class="nx">end</span><span class="p">(</span><span class="s1">'hello at otherdomain.com'</span><span class="p">);</span>
-<span class="p">});</span>
+<div class="highlight highlight-js"><pre><span class="kd">var</span> <span class="nx">app</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">server</span><span class="p">()</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">domain</span><span class="p">(</span><span class="s1">'http://yourDomain.com/'</span><span class="p">)</span> <span class="c1">// &lt;-- ! full url required</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">start</span><span class="p">()</span>
 </pre></div>
+
+<h2>
+<a name="multiple-domains-on-the-same-and-different-ports" class="anchor" href="#multiple-domains-on-the-same-and-different-ports"><span class="octicon octicon-link"></span></a><strong>Multiple Domains on the same and different Ports:</strong>
+</h2>
+
+<div class="highlight highlight-js"><pre><span class="c1">// Diet</span>
+<span class="kd">var</span> <span class="nx">server</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'diet'</span><span class="p">)</span>
+
+<span class="c1">// Main Domain</span>
+<span class="kd">var</span> <span class="nx">app</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">server</span><span class="p">()</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">domain</span><span class="p">(</span><span class="s1">'http://example.com/'</span><span class="p">)</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">start</span><span class="p">()</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'/'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">$</span><span class="p">){</span>
+    <span class="nx">$</span><span class="p">.</span><span class="nx">end</span><span class="p">(</span><span class="s1">'hello world '</span><span class="p">)</span>
+<span class="p">})</span>
+
+<span class="c1">// Sub Domain</span>
+<span class="kd">var</span> <span class="nx">sub</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">server</span><span class="p">()</span>
+<span class="nx">sub</span><span class="p">.</span><span class="nx">domain</span><span class="p">(</span><span class="s1">'http://subdomain.example.com/'</span><span class="p">)</span>
+<span class="nx">sub</span><span class="p">.</span><span class="nx">start</span><span class="p">()</span>
+<span class="nx">sub</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'/'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">$</span><span class="p">){</span>
+    <span class="nx">$</span><span class="p">.</span><span class="nx">end</span><span class="p">(</span><span class="s1">'hello world at sub domain!'</span><span class="p">)</span>
+<span class="p">})</span>
+
+<span class="c1">// Other Domain</span>
+<span class="kd">var</span> <span class="nx">other</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">server</span><span class="p">()</span>
+<span class="nx">other</span><span class="p">.</span><span class="nx">domain</span><span class="p">(</span><span class="s1">'http://other.com/'</span><span class="p">)</span>
+<span class="nx">other</span><span class="p">.</span><span class="nx">start</span><span class="p">()</span>
+<span class="nx">other</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'/'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">$</span><span class="p">){</span>
+    <span class="nx">$</span><span class="p">.</span><span class="nx">end</span><span class="p">(</span><span class="s1">'hello world at other domain'</span><span class="p">)</span>
+<span class="p">})</span>
+</pre></div>
+
+<h2>
+<a name="domain-methods" class="anchor" href="#domain-methods"><span class="octicon octicon-link"></span></a><strong>Domain Methods</strong>
+</h2>
+
+<table>
+<thead><tr>
+<th align="left">Method</th>
+<th align="left">Description</th>
+</tr></thead>
+<tbody>
+<tr>
+<td align="left"><strong>app.plugin('plugin_name', config)</strong></td>
+<td align="left">includes a plugin, config is an optional object</td>
+</tr>
+<tr>
+<td align="left"><strong>app.start(callback)</strong></td>
+<td align="left">Starts the application by loading plugins and launchung the HTTP(S) Server. callback is optional</td>
+</tr>
+<tr>
+<td align="left"><strong>app.domain(url)</strong></td>
+<td align="left">Specifiy the domain your server will listen to. <code>url</code> can be a URL string or Node.js URL Object</td>
+</tr>
+<tr>
+<td align="left"><strong>app.get(path, plugins...)</strong></td>
+<td align="left">Register a GET Route</td>
+</tr>
+<tr>
+<td align="left"><strong>app.post(path, plugins...)</strong></td>
+<td align="left">Register a POST Route</td>
+</tr>
+<tr>
+<td align="left"><strong>app.path</strong></td>
+<td align="left">The system path to your application. It is <code>process.cwd()</code> by default</td>
+</tr>
+</tbody>
+</table><p><strong>Example for app.domain()</strong></p>
+
+<div class="highlight highlight-js"><pre><span class="c1">// Set Domain</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">domain</span><span class="p">(</span><span class="nx">url</span><span class="p">)</span> 
+
+<span class="c1">// `url` should be a full URL containing the protocol http or https </span>
+<span class="c1">// and the / at the end like:</span>
+<span class="c1">// "http://example.com/"</span>
+
+<span class="c1">// `url` can also be a Node.js URL Object such as</span>
+<span class="p">{</span>
+    <span class="nx">hostname</span><span class="o">:</span> <span class="s2">"nodejs.org"</span>
+    <span class="nx">origin</span><span class="o">:</span> <span class="s2">"http://nodejs.org"</span>
+    <span class="nx">port</span><span class="o">:</span> <span class="mi">80</span><span class="p">,</span>
+    <span class="nx">protocol</span><span class="o">:</span> <span class="s2">"http:"</span>
+<span class="p">}</span>
+</pre></div>
+
+<h1>
+<a name="writing-diet-plugins" class="anchor" href="#writing-diet-plugins"><span class="octicon octicon-link"></span></a><strong>Writing Diet Plugins</strong>
+</h1>
+
+<p>Writing diet plugins are almost identical to writing node.js modules except plugins have a different require method and are directly connected to Routes.</p>
+
+<p>To effectively demonstrate this we'll create a very simple bank application. The bank will have a <code>name</code> and a <code>vault</code>. We'll fill the vault with <code>6 coins</code> when the application starts.</p>
+
+<h4>
+<a name="1-lesson-1-require-plugins" class="anchor" href="#1-lesson-1-require-plugins"><span class="octicon octicon-link"></span></a><strong>1) Lesson 1: Require Plugins:</strong>
+</h4>
+
+<p>You can register plugins with <code>app.plugin()</code>. Plugins are only initialized after <code>app.start()</code> was executed. </p>
+
+<div class="highlight highlight-js"><pre><span class="c1">// cd ~/yourProject</span>
+<span class="kd">var</span> <span class="nx">server</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'diet'</span><span class="p">)</span>
+<span class="kd">var</span> <span class="nx">app</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">server</span><span class="p">()</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">domain</span><span class="p">(</span><span class="s1">'http://localhost:8000/'</span><span class="p">)</span>
+
+<span class="c1">// require the bank plugin from the node_modules folder</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">plugin</span><span class="p">(</span><span class="s1">'bank'</span><span class="p">,</span> <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s1">'John Doe'</span><span class="p">,</span> <span class="nx">vault</span><span class="o">:</span> <span class="mi">6</span> <span class="p">})</span>
+
+<span class="c1">// start the application</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">start</span><span class="p">()</span>
+</pre></div>
+
+<h4>
+<a name="2-lesson-2-accessing-custom-options-from-the-source-code-of-the-plugin" class="anchor" href="#2-lesson-2-accessing-custom-options-from-the-source-code-of-the-plugin"><span class="octicon octicon-link"></span></a><strong>2) Lesson 2: Accessing custom options from the source code of the plugin:</strong>
+</h4>
+
+<div class="highlight highlight-js"><pre><span class="c1">// cd ~/yourProject/node_modules/bank</span>
+<span class="nx">exports</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">app</span><span class="p">,</span> <span class="nx">options</span><span class="p">){</span>
+    <span class="c1">// let's see how much coins the bank has</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'   # The "'</span><span class="o">+</span> <span class="nx">options</span><span class="p">.</span><span class="nx">name</span> <span class="o">+</span><span class="s1">' Bank"'</span>
+                  <span class="o">+</span> <span class="s1">' has ['</span><span class="o">+</span> <span class="nx">options</span><span class="p">.</span><span class="nx">vault</span> <span class="o">+</span><span class="s1">'] coins.'</span><span class="p">)</span> 
+
+    <span class="c1">// prints -&gt; The "John Doe Bank" has [6] coins.</span>
+    <span class="c1">// then we need to return the plugin</span>
+    <span class="nx">app</span><span class="p">.</span><span class="k">return</span><span class="p">()</span> 
+<span class="p">}</span>
+</pre></div>
+
+<h4>
+<a name="3-lesson-3-create-a-global-plugin-for-all-routes" class="anchor" href="#3-lesson-3-create-a-global-plugin-for-all-routes"><span class="octicon octicon-link"></span></a><strong>3) Lesson 3: Create a Global Plugin for all routes:</strong>
+</h4>
+
+<p>Everyone who visits the app will be able to see and change the value of the vault with the <code>deposit</code> and <code>withdraw</code> methods.</p>
+
+<p>Let's extend our bank plugin with a <code>global</code> function inside <code>exports.onload</code>:</p>
+
+<div class="highlight highlight-js"><pre><span class="c1">// cd ~/yourProject/node_modules/bank</span>
+<span class="c1">// Note: `app` and `options` are stored in memory</span>
+
+<span class="nx">exports</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">app</span><span class="p">,</span> <span class="nx">options</span><span class="p">){</span>    
+    <span class="k">this</span><span class="p">.</span><span class="nx">global</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">$</span><span class="p">){</span>
+        <span class="c1">// this creates a new instance </span>
+        <span class="c1">// of the $.bank in everyone visitors route</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">name</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">vault</span> <span class="o">=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">vault</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">deposit</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">amount</span><span class="p">){</span>
+            <span class="nx">options</span><span class="p">.</span><span class="nx">vault</span> <span class="o">+=</span> <span class="nb">parseInt</span><span class="p">(</span><span class="nx">amount</span><span class="p">)</span>
+        <span class="p">}</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">withdraw</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">amount</span><span class="p">){</span>
+            <span class="nx">options</span><span class="p">.</span><span class="nx">vault</span> <span class="o">-=</span> <span class="nb">parseInt</span><span class="p">(</span><span class="nx">amount</span><span class="p">)</span>
+        <span class="p">}</span>
+        <span class="nx">$</span><span class="p">.</span><span class="k">return</span><span class="p">(</span><span class="k">this</span><span class="p">)</span>
+    <span class="p">}</span>
+    <span class="nx">app</span><span class="p">.</span><span class="k">return</span><span class="p">(</span><span class="k">this</span><span class="p">)</span>
+<span class="p">}</span>
+</pre></div>
+
+<p>Now that we created the plugin we can access the <code>$.bank</code> in all Routes of the <code>app</code>. Let's extend our <em>index.js</em> file with some <code>Routes</code> so visitors can <code>see</code> the vault and <code>withdraw</code>/ <code>deposit</code> coins.</p>
+
+<div class="highlight highlight-js"><pre><span class="c1">// cd ~/yourProject/index.js</span>
+<span class="kd">var</span> <span class="nx">server</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'diet'</span><span class="p">)</span>
+<span class="kd">var</span> <span class="nx">app</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">server</span><span class="p">()</span>
+
+<span class="c1">// setup domain</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">domain</span><span class="p">(</span><span class="s1">'http://localhost:8000/'</span><span class="p">)</span>
+
+<span class="c1">// use the bank plugin</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">plugin</span><span class="p">(</span><span class="s1">'bank'</span><span class="p">,</span> <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s1">'John Doe'</span><span class="p">,</span> <span class="nx">vault</span><span class="o">:</span> <span class="mi">6</span> <span class="p">})</span>
+
+<span class="c1">// start the application</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">start</span><span class="p">()</span>
+
+<span class="c1">// instruct our app to</span>
+<span class="c1">// print 'The "Y Bank" owns X coins'</span>
+<span class="c1">// upon visiting /</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'/'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">$</span><span class="p">){</span>
+    <span class="nx">$</span><span class="p">.</span><span class="nx">end</span><span class="p">(</span><span class="s1">'The "'</span><span class="o">+</span> <span class="nx">$</span><span class="p">.</span><span class="nx">bank</span><span class="p">.</span><span class="nx">name</span> <span class="o">+</span><span class="s1">' Bank" '</span>
+        <span class="o">+</span> <span class="s1">'has ['</span><span class="o">+</span> <span class="nx">$</span><span class="p">.</span><span class="nx">bank</span><span class="p">.</span><span class="nx">vault</span> <span class="o">+</span><span class="s1">'] coins.'</span><span class="p">)</span>
+<span class="p">})</span>
+
+<span class="c1">// instruct our app to</span>
+<span class="c1">// deposit X amount coins into the vault </span>
+<span class="c1">// upon visiting /banks/deposit/10 </span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'/bank/deposit/:amount'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">$</span><span class="p">){</span>
+    <span class="nx">$</span><span class="p">.</span><span class="nx">bank</span><span class="p">.</span><span class="nx">deposit</span><span class="p">(</span><span class="nx">$</span><span class="p">.</span><span class="nx">params</span><span class="p">.</span><span class="nx">amount</span><span class="p">)</span>
+    <span class="nx">$</span><span class="p">.</span><span class="nx">redirect</span><span class="p">(</span><span class="s1">'home'</span><span class="p">)</span>
+<span class="p">})</span>
+
+<span class="c1">// instruct our app to</span>
+<span class="c1">// withdraw X amount coins from the vault</span>
+<span class="c1">// upon visiting /banks/withdraw/5  </span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'/bank/withdraw/:amount'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">$</span><span class="p">){</span>
+    <span class="nx">$</span><span class="p">.</span><span class="nx">bank</span><span class="p">.</span><span class="nx">withdraw</span><span class="p">(</span><span class="nx">$</span><span class="p">.</span><span class="nx">params</span><span class="p">.</span><span class="nx">amount</span><span class="p">)</span>
+    <span class="nx">$</span><span class="p">.</span><span class="nx">redirect</span><span class="p">(</span><span class="s1">'home'</span><span class="p">)</span>
+<span class="p">})</span>
+</pre></div>
+
+<p>And we're done! Navigate to your project's folder in your terminal and run the application:</p>
+
+<div class="highlight highlight-bash"><pre><span class="c"># bash screen 1</span>
+<span class="nb">cd</span> ~/yourProject/
+node index.js
+</pre></div>
+
+<p>Now open another terminal screen and let's test the app:</p>
+
+<div class="highlight highlight-bash"><pre><span class="c"># bash screen 2</span>
+curl <span class="s2">"http://localhost:8000/"</span>
+// The <span class="s2">"John Doe Bank"</span> owns <span class="o">[</span>6<span class="o">]</span> coins.
+
+curl -L <span class="s2">"http://localhost:8000/bank/deposit/10"</span>
+// The <span class="s2">"John Doe Bank"</span> owns <span class="o">[</span>16<span class="o">]</span> coins.
+
+curl -L <span class="s2">"http://localhost:8000/bank/widthraw/9"</span>
+// The <span class="s2">"John Doe Bank"</span> owns <span class="o">[</span>7<span class="o">]</span> coins.
+
+</pre></div>
+
+<p>Sweet! I admit it's a pretty retarded bank app, but hey I hope at least you've got some of the ideas behind the <code>global plugins</code>.</p>
+
+<h4>
+<a name="3-lesson-4-create-a-local-plugin" class="anchor" href="#3-lesson-4-create-a-local-plugin"><span class="octicon octicon-link"></span></a><strong>3) Lesson 4: Create a Local Plugin:</strong>
+</h4>
+
+<p>....UNDER CONSTRUCTION....</p>
+
+<h4>
+<a name="plugin-types" class="anchor" href="#plugin-types"><span class="octicon octicon-link"></span></a><strong>Plugin Types</strong>
+</h4>
+
+<p>Plugins may be all or at least one of these types:</p>
+
+<ul>
+<li>
+<strong>Onload</strong> module plugin</li>
+<li>
+<strong>Global</strong> module plugin</li>
+<li>
+<strong>Custom</strong> module plugin</li>
+<li>
+<strong>Local</strong> module plugin</li>
+<li>**Local ** stand alon function plugin</li>
+</ul><h1>
+<a name="todos" class="anchor" href="#todos"><span class="octicon octicon-link"></span></a><strong>Todos</strong>
+</h1>
+
+<p>Upcoming updates and features:
+<a href="https://github.com/adamhalasz/diet/wiki/Todos">https://github.com/adamhalasz/diet/wiki/Todos</a></p>
+
+<h1>
+<a name="license" class="anchor" href="#license"><span class="octicon octicon-link"></span></a><strong>License</strong>
+</h1>
+
+<p>(The MIT License)</p>
+
+<p>Copyright (c) 2014 Halász Ádám <a href="mailto:mail@adamhalasz.com">mail@adamhalasz.com</a></p>
+
+<p>Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:</p>
+
+<p>The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.</p>
+
+<p>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.</p>
       </section>
       <footer>
         <p>Project maintained by <a href="https://github.com/adamhalasz">adamhalasz</a></p>
