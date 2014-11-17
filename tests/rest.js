@@ -11,7 +11,7 @@ var post_subject = 'Test'.cyan + ' → '.grey + 'REST POST'.yellow + ': '.grey;
 var put_subject = 'Test'.cyan + ' → '.grey + 'REST PUT'.yellow + ': '.grey;
 
 var app = new server({debug: false});
-app.domain('http://localhost:9000/');
+app.domain('http://localhost:9044/');
 app.start(function() {
 
     describe(put_subject + 'Test REST Request/Response', function () {
@@ -29,10 +29,10 @@ app.start(function() {
         		});
                 
     			
-    			request('http://localhost:9000')
+    			request('http://localhost:9044')
     				.put('/api/newuser/12')
                     .send()
-    				.set('Content-Type', 'application/json')
+    				.set('Content-Type', 'application/json; charset=utf-8')
     				.expect(200) // Not Content
     				.end(function(err,res) {
     					if (err) {
@@ -43,10 +43,10 @@ app.start(function() {
     					res.body.should.eql({passed: false, errors: {"204": "No Content"}});
     			    });
                 
-        			request('http://localhost:9000')
+        			request('http://localhost:9044')
         				.put('/api/newuser/12')
                         .send({id: 1, name: "joe"})
-        				.set('Content-Type', 'application/json')
+        				.set('Content-Type', 'application/json; charset=utf-8')
         				.expect(200) // Created
         				.end(function(err,res) {
         					if (err) {
@@ -72,10 +72,10 @@ app.start(function() {
         			$.json($.body);
         		});
             
-    			request('http://localhost:9000')
+    			request('http://localhost:9044')
     				.put('/api/newuser/1')
                     .send({id: 1, name: "joe"})
-    				.set('Content-Type', 'application/json')
+    				.set('Content-Type', 'application/json; charset=utf-8')
     				.expect(200) // Created
     				.end(function(err,res) {
     					if (err) {
@@ -102,9 +102,9 @@ app.start(function() {
                     $.error(404, {'404': "Not found"});
         		});
 		
-    			request('http://localhost:9000')
+    			request('http://localhost:9044')
     				.post('/api/notpostfound')
-    				.set('Content-Type', 'application/json')
+    				.set('Content-Type', 'application/json; charset=utf-8')
     				.expect(404)
     				.end(function(err,res) {
     					if (err) {
@@ -124,9 +124,9 @@ app.start(function() {
                     $.error(404);
         		});
 		
-    			request('http://localhost:9000')
+    			request('http://localhost:9044')
     				.post('/api/notpostfound2')
-    				.set('Content-Type', 'application/json')
+    				.set('Content-Type', 'application/json; charset=utf-8')
     				.expect(404)
     				.end(function(err,res) {
     					if (err) {
@@ -151,10 +151,10 @@ app.start(function() {
         			$.json($.body);
         		});
                 
-    			request('http://localhost:9000')
+    			request('http://localhost:9044')
     				.post('/jsonapi/newuser')
                     .send({id: 1, name: "joe"})
-    				.set('Content-Type', 'application/json')
+    				.set('Content-Type', 'application/json; charset=utf-8')
     				.expect(201) // Created
     				.end(function(err,res) {
     					if (err) {
@@ -180,9 +180,9 @@ app.start(function() {
         			$.success();
         		});
                 
-    			request('http://localhost:9000')
+    			request('http://localhost:9044')
     				.post('/api/newdata')
-    				.set('Content-Type', 'application/json')
+    				.set('Content-Type', 'application/json; charset=utf-8')
     				.expect(201) // Created
     				.end(function(err,res) {
     					if (err) {
@@ -203,10 +203,10 @@ app.start(function() {
         			$.success();
         		});
 	            
-    			request('http://localhost:9000')
+    			request('http://localhost:9044')
     				.post('/api/newuser')
                 .send({id: 1, name: "joe"})
-    				.set('Content-Type', 'application/json')
+    				.set('Content-Type', 'application/json; charset=utf-8')
     				.expect(201) // Created
     				.end(function(err,res) {
     					if (err) {
@@ -233,9 +233,9 @@ app.start(function() {
         				$.error(501);
         			});
 
-        			request('http://localhost:9000')
+        			request('http://localhost:9044')
         				.get('/api/noimplemented')
-        				.set('Content-Type', 'application/json')
+        				.set('Content-Type', 'application/json; charset=utf-8')
         				.expect(501)
         				.end(function(err,res) {
         					if (err) {
@@ -254,9 +254,9 @@ app.start(function() {
         				$.error(500, {error: "Can't get resource"});
         			});
 
-        			request('http://localhost:9000')
+        			request('http://localhost:9044')
         				.get('/api/data/-13')
-        				.set('Content-Type', 'application/json')
+        				.set('Content-Type', 'application/json; charset=utf-8')
         				.expect(500)
         				.end(function(err,res) {
         					if (err) {
@@ -275,9 +275,9 @@ app.start(function() {
         				$.error(500, {error: "Unexpeted input"});
         			});
 
-        			request('http://localhost:9000')
+        			request('http://localhost:9044')
         				.get('/api/data/-11')
-        				.set('Content-Type', 'application/json')
+        				.set('Content-Type', 'application/json; charset=utf-8')
         				.expect(500)
         				.end(function(err,res) {
         					if (err) {
@@ -295,9 +295,9 @@ app.start(function() {
             			$.error(404, {"404": "Not found"});
             		});
 
-        			request('http://localhost:9000')
+        			request('http://localhost:9044')
         				.get('/api/data/-1')
-        				.set('Content-Type', 'application/json')
+        				.set('Content-Type', 'application/json; charset=utf-8')
         				.expect(404)
         				.end(function(err,res) {
         					if (err) {
@@ -312,9 +312,9 @@ app.start(function() {
                 
                 it('should respond with plain text when not found GET route'.grey, function (done) {
 
-        			request('http://localhost:9000')
+        			request('http://localhost:9044')
         				.get('/api/notfound')
-                        .set('Content-Type', 'application/json')
+                        .set('Content-Type', 'application/json; charset=utf-8')
         				.expect(404)
         				.end(function(err,res) {
         					if (err) {
@@ -340,9 +340,9 @@ app.start(function() {
     				$.json(null);
     			});
 
-    			request('http://localhost:9000')
+    			request('http://localhost:9044')
     				.get('/api/data/0')
-    				.set('Content-Type', 'application/json')
+    				.set('Content-Type', 'application/json; charset=utf-8')
     				.expect(200)
     				.end(function(err,res) {
     					if (err) {
@@ -362,9 +362,9 @@ app.start(function() {
     				});
     			});
 
-    			request('http://localhost:9000')
+    			request('http://localhost:9044')
     				.get('/api/data/1')
-    				.set('Content-Type', 'application/json')
+    				.set('Content-Type', 'application/json; charset=utf-8')
     				.expect(200)
     				.expect('Content-Type', /json/)
     				.end(function(err,res) {
@@ -385,9 +385,9 @@ app.start(function() {
     				]);
     			});
 
-    			request('http://localhost:9000')
+    			request('http://localhost:9044')
     				.get('/api/data')
-    				.set('Content-Type', 'application/json')
+    				.set('Content-Type', 'application/json; charset=utf-8')
     				.expect(200)
     				.expect('Content-Type', /json/)
     				.end(function(err,res) {
@@ -409,9 +409,9 @@ app.start(function() {
     				$.json(null);
     			});
 
-    			request('http://localhost:9000')
+    			request('http://localhost:9044')
     				.get('/api/secure')
-    				.set('Content-Type', 'application/json')
+    				.set('Content-Type', 'application/json; charset=utf-8')
     				.expect(401)
     				.end(function(err,res) {
     					if (err) {
@@ -435,9 +435,9 @@ app.start(function() {
     				], 201);
     			});
 
-    		request('http://localhost:9000')
+    		request('http://localhost:9044')
     			.get('/api/data/2')
-    			.set('Content-Type', 'application/json')
+    			.set('Content-Type', 'application/json; charset=utf-8')
     			.expect(201)
     			.expect('Content-Type', /json/)
     			.end(function(err,res) {

@@ -395,7 +395,7 @@ app.start(function(){
 			request.get('http://localhost:9010/signal/responses/success', function(error, response, body){
 				if(error) throw error;
 				assert.equal(body, '{"passed":true}');
-				assert.equal(response.headers['content-type'], 'application/json');
+				assert.equal(response.headers['content-type'], 'application/json; charset=utf-8');
 				done();
 			});
 		});
@@ -411,7 +411,7 @@ app.start(function(){
 			request.get('http://localhost:9010/signal/responses/error', function(error, response, body){
 				if(error) throw error;
 				assert.equal(body, '{"passed":false,"errors":{"test":"testing"}}');
-				assert.equal(response.headers['content-type'], 'application/json');
+				assert.equal(response.headers['content-type'], 'application/json; charset=utf-8');
 				done();
 			});
 		});
@@ -446,7 +446,7 @@ app.start(function(){
 			request.get('http://localhost:9010/signal/responses/json', function(error, response, body){
 				if(error) throw error;
 				assert.equal(body, '{"string":"test","number":10,"boolean":true}');
-				assert.equal(response.headers['content-type'], 'application/json');
+				assert.equal(response.headers['content-type'], 'application/json; charset=utf-8');
 				done();
 			});
 		});
