@@ -40,11 +40,14 @@
     "url": "http://adamhalasz.com/"
   },
   "dependencies": {
+    "busboy": "^0.2.9",
     "callsite": ">=1.0.0",
     "colors": ">=0.6.2",
     "diet-qs": ">=0.1.0",
+    "mkdirp": "^0.5.0",
     "nextjs": ">=0.0.3",
     "path-to-regexp": ">=0.2.3",
+    "qs": "^2.3.3",
     "stacktrace-js": ">=0.6.2",
     "sugar": "1.4.1"
   },
