@@ -7,6 +7,11 @@ var request = require('request');
 
 var subject = 'Test'.cyan+' → '.grey+ 'Plugins (onload)'.yellow + ': '.grey;
 
+// Isset
+var isset = function(object){
+	return (object !== "undefined" && object !== undefined && object !== null && object !== "" && typeof(object) !== 'undefined') ? true : false;
+};
+
 describe(subject + 'Plain Onload Plugin', function(){
 	it('should create an app and use the non-regular module `yo` plugin then makes sure that yo.message is "Yo!"'.grey
 	, function(done){	
