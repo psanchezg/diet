@@ -1,6 +1,6 @@
 {
   "name": "diet",
-  "version": "0.8.6",
+  "version": "0.8.7",
   "description": "Fast, plugin based, easy to use HTTP(s) framework for node",
   "homepage": "http://dietjs.com/",
   "keywords": [
@@ -47,7 +47,9 @@
     "nextjs": ">=0.0.3",
     "path-to-regexp": ">=0.2.3",
     "stacktrace-js": ">=0.6.2",
-    "sugar": "~1.4.1"
+    "sugar": "~1.4.1",
+    "dicer": "0.2.3",
+    "readable-stream": "1.1.x"
   },
   "devDependencies": {
     "rewire": ">=2.1.0",
