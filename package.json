@@ -25,6 +25,12 @@
     "dietjs",
     "diet.js"
   ],
+  "contributors": [
+    {
+      "name": "Pablo Sánchez",
+      "email": "psanchezg@gmail.com"
+    }
+  ],
   "bugs": {
     "url": "http://github.com/adamhalasz/diet/issues",
     "email": "mail@adamhalasz.com"
