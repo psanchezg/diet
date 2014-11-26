@@ -91,6 +91,9 @@ Csv.prototype.write = function (data, cb) {
                     break;
                 }
             }
+            if (i === len) { /*last value without LF*/
+                idxamp = i;
+            }
             if (idxamp !== undefined) {
                 ++this._fields;
                 if (idxamp > p) {
