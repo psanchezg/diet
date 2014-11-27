@@ -73,7 +73,6 @@
     "node": ">=0.8.0"
   },
   "scripts": {
-    "test": "mocha tests",
-    "coveralls": "jscoverage tests tests-cov"
+    "test": "mocha -r jscoverage -R spec tests"
   }
 }

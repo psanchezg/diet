@@ -3,5 +3,5 @@ npm-debug.log
 /node_modules
 /node_modules/*
 covreporter.html
-.tests-cov
+tests-cov
 node_modules

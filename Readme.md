@@ -1,9 +1,10 @@
 [![Diet.js](http://imgur.com/3LBDJRB.png)](https://dietjs.com/) 
 
-Fast, plugin based, easy to use HTTP(s) framework for [node][1]
+Fast, plugin based, easy to use HTTP(s) framework for [node][1] + REST API's
 
-[![Build Status](http://img.shields.io/travis/adamhalasz/diet.svg?style=flat)](https://travis-ci.org/adamhalasz/diet) [![NPM](http://img.shields.io/npm/v/diet.svg?style=flat)](https://www.npmjs.org/package/diet) [![Downloads](http://img.shields.io/npm/dm/diet.svg?style=flat)](https://www.npmjs.org/package/diet) [![Coveralls](http://img.shields.io/coveralls/adamhalasz/diet.svg?style=flat)](https://coveralls.io/r/adamhalasz/diet)
-
+[![Build Status](https://travis-ci.org/psanchezg/diet.svg)](https://travis-ci.org/psanchezg/diet)
+[![NPM](http://img.shields.io/npm/v/diet.svg?style=flat)](https://www.npmjs.org/package/diet) [![Downloads](http://img.shields.io/npm/dm/diet.svg?style=flat)](https://www.npmjs.org/package/diet) 
+[![Coverage Status](https://img.shields.io/coveralls/psanchezg/diet.svg)](https://coveralls.io/r/psanchezg/diet)
 
 ```js
 var server = require('diet')
@@ -31,7 +32,7 @@ node -p "require('diet').server(8000).start().get('/', function($){ $.end('yo') 
 Diet helps to build web server logic faster & eaiser, and nothing more. 
 
 #### **Easy Configuration**
-Many common use cases are simplified as much as it was possible. For example, using HTTPS, hosting multiple domains, parsing headers, querystring, post body etc...
+Many common use cases are simplified as much as it was possible. For example, using HTTPS, hosting multiple domains, parsing headers, querystring, post body, etc...
 
 #### **Standardized Middleware Structure**
 Diet has middlewares just like express.js, the difference is in how modules are connected and used in the Router. Diet allows easier module configuration and modules can be chained. Modules designed for diet are called  `Plugins`.
