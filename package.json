@@ -58,7 +58,7 @@
     "readable-stream": "1.1.x"
   },
   "devDependencies": {
-    "coveralls": ">=2.11.1",
+    "coveralls": "~2.11.2",
     "istanbul": "~0.3.2",
     "jscoverage": "~0.5.9",
     "mocha": "~1.21.4",
@@ -74,6 +74,6 @@
     "node": ">=0.8.0"
   },
   "scripts": {
-    "test": "mocha -r jscoverage -R spec tests"
+    "test": "./node_modules/.bin/mocha -r jscoverage -R mocha-lcov-reporter tests | ./node_modules/coveralls/bin/coveralls.js"
   }
 }
