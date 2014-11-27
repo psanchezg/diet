@@ -58,14 +58,15 @@
     "readable-stream": "1.1.x"
   },
   "devDependencies": {
-    "rewire": ">=2.1.0",
     "coveralls": ">=2.11.1",
     "istanbul": "~0.3.2",
+    "jscoverage": "^0.5.9",
     "mocha": "~1.21.4",
     "mocha-lcov-reporter": "0.0.1",
-    "request": ">=2.40.0",
-    "should": "*",
     "qs": "~2.3.3",
+    "request": ">=2.40.0",
+    "rewire": ">=2.1.0",
+    "should": "*",
     "supertest": "~0.15.0"
   },
   "main": "index.js",
