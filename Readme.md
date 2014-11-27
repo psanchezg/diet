@@ -4,7 +4,7 @@ Fast, plugin based, easy to use HTTP(s) framework for [node][1] + REST API's
 
 [![Build Status](https://travis-ci.org/psanchezg/diet.svg)](https://travis-ci.org/psanchezg/diet)
 [![NPM](http://img.shields.io/npm/v/diet.svg?style=flat)](https://www.npmjs.org/package/diet) [![Downloads](http://img.shields.io/npm/dm/diet.svg?style=flat)](https://www.npmjs.org/package/diet) 
-[![Coverage Status](https://img.shields.io/coveralls/psanchezg/diet.svg)](https://coveralls.io/r/psanchezg/diet)
+[![Coverage Status](https://coveralls.io/repos/psanchezg/diet/badge.png)](https://coveralls.io/r/psanchezg/diet)
 
 ```js
 var server = require('diet')
