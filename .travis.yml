@@ -9,5 +9,4 @@ addons:
     - test2.local.com
     - test3.local.com
 after_success:
-  - ./node_modules/.bin/jscoverage tests tests-cov
-  - ./node_modules/.bin/mocha tests/**.js -R mocha-lcov-reporter | ./node_modules/coveralls/bin/coveralls.js
+  - coveralls
