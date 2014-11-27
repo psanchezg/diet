@@ -8,5 +8,3 @@ addons:
     - test.local.com
     - test2.local.com
     - test3.local.com
-after_success:
-  - coveralls
