@@ -39,8 +39,8 @@ app.start(function() {
     						throw err;
     					}
     					res.headers.should.have.property('content-type', 'application/json; charset=utf-8');
-    					assert.deepEqual(res.body, {passed: false, errors: {"204": "No Content"}});
-    					res.body.should.eql({passed: false, errors: {"204": "No Content"}});
+    					assert.deepEqual(res.body, {passed: false, errors: [{"204": "No Content"}]});
+    					res.body.should.eql({passed: false, errors: [{"204": "No Content"}]});
     			    });
                 
         			request('http://localhost:9044')
@@ -95,7 +95,7 @@ app.start(function() {
         
         describe('$.error()', function () {
             
-            it('should respond with json implicit ({passed: false, errors:{"404": "Not found"}})'.grey, function (done) {
+            it('should respond with json implicit ({passed: false, errors:[{"404": "Not found"}]})'.grey, function (done) {
 		
         		app.post('/api/notpostfound', function ($) {
                     //$.errors['404'] = "Not found";
@@ -111,17 +111,16 @@ app.start(function() {
     						throw err;
     					}
     					res.headers.should.have.property('content-type', 'application/json; charset=utf-8');
-    					assert.deepEqual(res.body, {passed: false, errors:{"404": "Not found"}});
-    					res.body.should.eql({passed: false, errors:{"404": "Not found"}});
+    					assert.deepEqual(res.body, {passed: false, errors:[{"404": "Not found"}]});
+    					res.body.should.eql({passed: false, errors:[{"404": "Not found"}]});
     					done();
 				});
         	});
             
-            it('should respond with json explicit ({passed: false, errors:{"404": "Not found"}})'.grey, function (done) {
+            it('should respond with json explicit ({passed: false, errors:[{"404": "Not found"}]})'.grey, function (done) {
 		
         		app.post('/api/notpostfound2', function ($) {
-                    $.errors['404'] = "Not found";
-                    $.error(404);
+                    $.error(404, {"404": "Not found"});
         		});
 		
     			request('http://localhost:9044')
@@ -133,8 +132,8 @@ app.start(function() {
     						throw err;
     					}
     					res.headers.should.have.property('content-type', 'application/json; charset=utf-8');
-    					assert.deepEqual(res.body, {passed: false, errors:{"404": "Not found"}});
-    					res.body.should.eql({passed: false, errors:{"404": "Not found"}});
+    					assert.deepEqual(res.body, {passed: false, errors:[{"404": "Not found"}]});
+    					res.body.should.eql({passed: false, errors:[{"404": "Not found"}]});
     					done();
 				});
 
@@ -228,7 +227,7 @@ app.start(function() {
         describe('$.error(object)', function () {
 
         	describe('response JSON when given primitives', function () {
-        		it('should respond with json ({passed: false, errors: {}})', function(done) {
+        		it('should respond with json ({passed: false, errors: []})', function(done) {
         			app.get('/api/noimplemented', function($) {
         				$.error(501);
         			});
@@ -242,13 +241,13 @@ app.start(function() {
         						throw err;
         					}
         					res.headers.should.have.property('content-type', 'application/json; charset=utf-8');
-        					assert.deepEqual(res.body, {passed: false, errors: {}});
-        					res.body.should.eql({passed: false, errors: {}});
+        					assert.deepEqual(res.body, {passed: false, errors: []});
+        					res.body.should.eql({passed: false, errors: []});
         					done();
         				});
         		});
 	    
-        		it('should respond with json ({passed: false, errors: {error: "Can\'t get resource"}})', function(done) {
+        		it('should respond with json ({passed: false, errors: [{"error":"Can\'t get resource"}]})', function(done) {
 
         			app.get('/api/data/-13', function($) {
         				$.error(500, {error: "Can't get resource"});
@@ -263,13 +262,13 @@ app.start(function() {
         						throw err;
         					}
         					res.headers.should.have.property('content-type', 'application/json; charset=utf-8');
-        					assert.deepEqual(res.body, {passed: false, errors: {error: "Can't get resource"}});
-        					res.body.should.eql({passed: false, errors: {error: "Can't get resource"}});
+        					assert.deepEqual(res.body, {passed: false, errors: [{error: "Can't get resource"}]});
+        					res.body.should.eql({passed: false, errors: [{error: "Can't get resource"}]});
         					done();
         				});
         		});
 	
-        		it('should respond with json ({passed: false, errors: {error: "Unexpeted input"}})', function(done) {
+        		it('should respond with json ({passed: false, errors: [{error: "Unexpeted input"}]})', function(done) {
 
         			app.get('/api/data/-11', function($) {
         				$.error(500, {error: "Unexpeted input"});
@@ -284,13 +283,13 @@ app.start(function() {
         						throw err;
         					}
         					res.headers.should.have.property('content-type', 'application/json; charset=utf-8');
-        					assert.deepEqual(res.body, {passed: false, errors: {error: "Unexpeted input"}});
-        					res.body.should.eql({passed: false, errors: {error: "Unexpeted input"}});
+        					assert.deepEqual(res.body, {passed: false, errors: [{error: "Unexpeted input"}]});
+        					res.body.should.eql({passed: false, errors: [{error: "Unexpeted input"}]});
         					done();
         				});
         		});
         
-                it('should respond with json ({passed: false, errors: {404: "Not found"}})'.grey, function (done) {
+                it('should respond with json ({passed: false, errors: [{"404": "Not found"}]})'.grey, function (done) {
             		app.get('/api/data/-1', function ($) {
             			$.error(404, {"404": "Not found"});
             		});
@@ -304,8 +303,8 @@ app.start(function() {
         						throw err;
         					}
                             res.headers.should.have.property('content-type', 'application/json; charset=utf-8');
-        					assert.deepEqual(res.body, {passed: false, errors: {"404": "Not found"}});
-        					res.body.should.eql({passed: false, errors: {"404": "Not found"}});
+        					assert.deepEqual(res.body, {passed: false, errors: [{"404": "Not found"}]});
+        					res.body.should.eql({passed: false, errors: [{"404": "Not found"}]});
                             done();
                         });
             	});
@@ -404,9 +403,7 @@ app.start(function() {
     		it('should respond with 401 when unauthorized', function(done) {
 
     			app.get('/api/secure', function($) {
-    				$.passed = false;
-    				$.errors['401'] = 'Unauthorized';
-    				$.json(null);
+                    $.error(401, {error: 'Unauthorized'})
     			});
 
     			request('http://localhost:9044')
@@ -418,8 +415,8 @@ app.start(function() {
     						throw err;
     					}
     					res.headers.should.have.property('content-type', 'application/json; charset=utf-8');
-    					assert.deepEqual(res.body, {passed: false, errors: {401: "Unauthorized"}});
-    					res.body.should.eql({passed: false, errors: {401: "Unauthorized"}});
+    					assert.deepEqual(res.body, {passed: false, errors: [{error: "Unauthorized"}]});
+    					res.body.should.eql({passed: false, errors: [{error: "Unauthorized"}]});
     					done();
     				});
     		});

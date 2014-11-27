@@ -404,13 +404,13 @@ app.start(function(){
 		, function(done){
 			
 			app.get('/signal/responses/error', function($){
-				$.errors.test = 'testing';
+				$.errors.push({test: 'testing'});
 				$.error();
 			});
 			
 			request.get('http://localhost:9010/signal/responses/error', function(error, response, body){
 				if(error) throw error;
-				assert.equal(body, '{"passed":false,"errors":{"test":"testing"}}');
+				assert.equal(body, '{"passed":false,"errors":[{"test":"testing"}]}');
 				assert.equal(response.headers['content-type'], 'application/json; charset=utf-8');
 				done();
 			});
