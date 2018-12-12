@@ -1,3 +1,7 @@
+._*
+.DS_Store
+.gitn
+package-lock.json
 npm-debug.log
 .coveralls.yml
 /node_modules
