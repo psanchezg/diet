@@ -52,7 +52,7 @@
     "mkdirp": "~0.5.0",
     "nextjs": ">=0.0.3",
     "path-to-regexp": ">=0.2.3",
-    "stacktrace-js": ">=0.6.2",
+    "stacktrace-js": "~0.6.4",
     "sugar": "~1.4.1",
     "dicer": "0.2.3",
     "readable-stream": "1.1.x"
