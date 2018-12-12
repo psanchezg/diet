@@ -1,6 +1,6 @@
 {
   "name": "diet",
-  "version": "0.8.8",
+  "version": "0.8.9",
   "description": "Fast, plugin based, easy to use HTTP(s) framework for node",
   "homepage": "http://dietjs.com/",
   "keywords": [
@@ -32,12 +32,11 @@
     }
   ],
   "bugs": {
-    "url": "http://github.com/adamhalasz/diet/issues",
-    "email": "mail@adamhalasz.com"
+    "url": "http://github.com/psanchezg/diet/issues"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/adamhalasz/diet.git"
+    "url": "https://github.com/psanchezg/diet.git"
   },
   "license": "MIT",
   "author": {
@@ -58,16 +57,16 @@
     "readable-stream": "1.1.x"
   },
   "devDependencies": {
-    "coveralls": "~2.11.2",
-    "istanbul": "~0.3.2",
-    "jscoverage": "~0.5.9",
-    "mocha": "~1.21.4",
+    "coveralls": "^3.0.2",
+    "istanbul": "^0.4.5",
+    "jscoverage": "^0.6.0",
+    "mocha": "^6.0.0",
     "mocha-lcov-reporter": "0.0.1",
     "qs": "~2.3.3",
-    "request": ">=2.40.0",
+    "request": "^2.88.0",
     "rewire": ">=2.1.0",
     "should": "*",
-    "supertest": "~0.15.0"
+    "supertest": "^3.3.0"
   },
   "main": "index.js",
   "engines": {
